@@ -1,37 +1,28 @@
 def _determine_controller_type(player):
     # TODO determine the type of the controller
     # for this player using libnx
-    return Controller
+    return DualJoyconController
 
 
 class Controller:
-    def __init__(self, player):
-        self._player = None
-        self.player = player
+    def __init__(self):
+        pass
 
     @staticmethod
     def from_player(player):
         controller_class = _determine_controller_type(player)
-        return controller_class(player)
-
-    @property
-    def player(self):
-        return self._player
-
-    @player.setter
-    def player(self, player):
-        self._player = player
+        return controller_class()
 
 
 class SwitchProController(Controller):
     pass
 
 
-class JoyconController:
+class JoyconController(Controller):
     pass
 
 
-class DualJoyconController:
+class DualJoyconController(Controller):
     pass
 
 
