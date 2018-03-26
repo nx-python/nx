@@ -1,8 +1,8 @@
 from .audio import *
 from .controllers import *
 from .titles import *
-from players import *
-from users import *
+from .players import *
+from .users import *
 
 
 p1 = Player(1)

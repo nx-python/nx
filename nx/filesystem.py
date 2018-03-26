@@ -1,4 +1,4 @@
-import path
+import pathlib
 import _nx
 
 from .utils.cached_property import cached_property
@@ -13,22 +13,22 @@ mounted_romfs = None  # TODO: check for a mounted romfs
 mounted_savedata = None  # TODO: check for a mounted savedata
 
 def wait_for_title_mount():
-    raise NotImplemented  # TODO: implement wait_for_title_mount
+    raise NotImplementedError  # TODO: implement wait_for_title_mount
 
 def wait_for_romfs_mount():
-    raise NotImplemented  # TODO: implement wait_for_romfs_mount
+    raise NotImplementedError  # TODO: implement wait_for_romfs_mount
 
 def wait_for_savedata_mount():
-    raise NotImplemented  # TODO: implement wait_for_savedata_mount
+    raise NotImplementedError  # TODO: implement wait_for_savedata_mount
 
 def wait_for_title_unmount():
-    raise NotImplemented  # TODO: implement wait_for_title_unmount
+    raise NotImplementedError  # TODO: implement wait_for_title_unmount
 
 def wait_for_romfs_unmount():
-    raise NotImplemented  # TODO: implement wait_for_romfs_unmount
+    raise NotImplementedError  # TODO: implement wait_for_romfs_unmount
 
 def wait_for_savedata_unmount():
-    raise NotImplemented  # TODO: implement wait_for_savedata_unmount
+    raise NotImplementedError  # TODO: implement wait_for_savedata_unmount
 
 
 class Partition:
@@ -47,13 +47,13 @@ class MountablePartition(Partition):
 
     @cached_property
     def is_mounted(self):
-        raise NotImplemented
+        raise NotImplementedError
 
     def mount(self):
-        raise NotImplemented
+        raise NotImplementedError
 
     def unmount(self):
-        raise NotImplemented
+        raise NotImplementedError
 
 
 class RomFS(MountablePartition):
@@ -66,10 +66,10 @@ class RomFS(MountablePartition):
         return self is mounted_romfs
 
     def mount(self):
-        raise NotImplemented  # TODO: implement RomFS.mount
+        raise NotImplementedError  # TODO: implement RomFS.mount
 
     def unmount(self):
-        raise NotImplemented  # TODO: implement RomFS.unmount
+        raise NotImplementedError  # TODO: implement RomFS.unmount
 
 
 class Savedata(MountablePartition):
@@ -82,7 +82,7 @@ class Savedata(MountablePartition):
         return self is mounted_savedata
 
     def mount(self):
-        raise NotImplemented  # TODO: implement Savedata.mount
+        raise NotImplementedError  # TODO: implement Savedata.mount
 
     def unmount(self):
-        raise NotImplemented  # TODO: implement Savedata.unmount
+        raise NotImplementedError  # TODO: implement Savedata.unmount
