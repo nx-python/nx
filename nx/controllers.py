@@ -40,4 +40,12 @@ class Button:
 
 
 class Joystick:
-    pass
+    def __init__(self):
+        self.x = 0.0
+        self.y = 0.0
+
+    def wait_for_movement(self):
+        raise NotImplementedError
+
+    def wait_for_neutral_position(self):
+        raise NotImplementedError
