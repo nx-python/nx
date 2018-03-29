@@ -1,6 +1,5 @@
 def _determine_controller_type(player):
-    # TODO determine the type of the controller
-    # for this player using libnx
+    # TODO determine the type of the controller for this player via _nx
     return DualJoyconController
 
 
@@ -23,6 +22,10 @@ class JoyconController(Controller):
 
 
 class DualJoyconController(Controller):
+    pass
+
+
+class FreeDualJoyconController(DualJoyconController):
     pass
 
 

@@ -28,23 +28,31 @@ def wait_for_savedata_unmount():
     raise NotImplementedError  # TODO: implement wait_for_savedata_unmount
 
 
-class Partition:
+class FileSystem:
     def __init__(self, base_path: str):
         self.base_path = pathlib.Path(base_path)
 
-    def open(self, file_path: str, *args, **kwargs):
-        return self.base_path.joinpath(file_path).open(*args, **kwargs)
+    def open(self, file_path: str, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        return self.base_path.joinpath(file_path).open(mode=mode, buffering=buffering,
+                                                       encoding=encoding, errors=errors,
+                                                       newline=newline)
 
 
-class MountablePartition(Partition):
+class MountableFileSystem(FileSystem):
     def __init__(self, base_path):
         super().__init__(base_path)
-        self.is_mounted = False
 
-    def open(self, file_path: str, *args, **kwargs):
+    @property
+    def is_mounted(self):
+        raise NotImplementedError
+
+    def open(self, file_path: str, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
         if not self.is_mounted:
             self.mount()
-        return super().open(file_path, *args, **kwargs)
+        return super().open(file_path, mode=mode, buffering=buffering, encoding=encoding,
+                            errors=errors, newline=newline)
 
     def mount(self):
         raise NotImplementedError
@@ -53,7 +61,7 @@ class MountablePartition(Partition):
         raise NotImplementedError
 
 
-class RomFS(MountablePartition):
+class RomFS(MountableFileSystem):
     def __init__(self, title):
         super().__init__(ROMFS_BASE_PATH)
         self.title = title
@@ -69,19 +77,23 @@ class RomFS(MountablePartition):
         raise NotImplementedError  # TODO: implement RomFS.unmount
 
 
-class Savedata(MountablePartition):
+class Savedata(MountableFileSystem):
     def __init__(self, title, user=None):
         super().__init__(SAVEDATA_BASE_PATH)
         self.title = title
         self.user = user if user is not None else users.active_user
 
+    @property
+    def is_mounted(self):
+        return self is mounted_savedata
+
     def mount(self):
         if self.is_mounted:
             return
         if self.user is None:
-            raise users.NoActiveUser("No active user, you need to launch and close a game prior to launching HBL.")
+            raise users.NoActiveUser("No active user, you need to launch and "
+                                     "close a game prior to launching HBL.")
         _nx.fs_mount_savedata("save", self.title.title_id, self.user.user_id)
-        self.is_mounted = True
 
     def unmount(self):
         raise NotImplementedError  # TODO: implement Savedata.unmount
