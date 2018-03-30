@@ -1,6 +1,6 @@
 import _nx
 
-from .utils.cached_property import cached_property
+from .utils import cached_property
 
 
 class NoActiveUser(Exception):
