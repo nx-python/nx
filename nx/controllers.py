@@ -106,6 +106,14 @@ class Button:
         self.player = player
         self.key_bits = key_bits
 
+    @classmethod
+    def from_buttons(cls, *buttons):
+        if not buttons:
+            raise TypeError("At least one Button must be passed")
+
+        _key_bits = [key_bit for button in buttons for key_bit in button.key_bits]
+        return cls(buttons[0].player, *_key_bits)
+
     @property
     def is_pressed(self):
         return any_pressed(self.player, self)

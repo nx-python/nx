@@ -1,26 +1,22 @@
 import _nx
 
-from .utils import cached_property
-
 
 class NoActiveUser(Exception):
     pass
 
 
 class User:
-    def __init__(self, user_id):
-        if user_id is None:
+    def __init__(self, id):
+        if id is None:
             raise NoActiveUser("No active user, you need to launch and close a game prior to launching HBL.")
-        self.user_id = user_id
+        self.id = id
 
     @property
     def is_active(self):
-        return self.user_id == active_user.user_id
+        return self.id == active_user.id
 
 
-@cached_property
-def active_user():
-    try:
-        return User(_nx.account_get_active_user())
-    except NoActiveUser:
-        return None
+try:
+    active_user = User(_nx.account_get_active_user())
+except NoActiveUser:
+    active_user = None

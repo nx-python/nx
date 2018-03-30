@@ -1,4 +1,4 @@
-from .controllers import Controller
+from .controllers import Controller, any_pressed as _any_pressed
 
 
 class Player:
@@ -6,38 +6,15 @@ class Player:
         self.number = number
         self.controller = Controller.from_player(self)
 
-    @property
-    def a_button(self):
-        return self.controller.a_button
+    _extra_controller_attributes = ('left', 'right', 'up', 'down', 'stick', 'left_stick',
+                                    'right_stick', 'left_joycon', 'right_joycon')
 
-    @property
-    def b_button(self):
-        return self.controller.b_button
+    def __getattr__(self, item):
+        if item.endswith('_button') or item in self._extra_controller_attributes:
+            try:
+                return getattr(self.controller, item)
+            except AttributeError:
+                return None
 
-    @property
-    def x_button(self):
-        return self.controller.x_button
-
-    @property
-    def y_button(self):
-        return self.controller.y_button
-
-    @property
-    def left(self):
-        return self.controller.left
-
-    @property
-    def right(self):
-        return self.controller.right
-
-    @property
-    def up(self):
-        return self.controller.up
-
-    @property
-    def down(self):
-        return self.controller.down
-
-    @property
-    def stick(self):
-        return self.controller.stick
+    def any_pressed(self, *buttons):
+        return _any_pressed(self, *buttons)

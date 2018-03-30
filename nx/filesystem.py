@@ -93,7 +93,7 @@ class Savedata(MountableFileSystem):
         if self.user is None:
             raise users.NoActiveUser("No active user, you need to launch and "
                                      "close a game prior to launching HBL.")
-        _nx.fs_mount_savedata("save", self.title.title_id, self.user.user_id)
+        _nx.fs_mount_savedata("save", self.title.id, self.user.id)
 
     def unmount(self):
         raise NotImplementedError  # TODO: implement Savedata.unmount

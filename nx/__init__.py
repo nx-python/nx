@@ -1,7 +1,7 @@
 import _nx
 
 from .audio import *
-from .controllers import *
+from .controllers import Button
 from .title import *
 from .players import *
 
