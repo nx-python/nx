@@ -12,7 +12,9 @@ class Touch:
         self.angle = angle
 
     def __repr__(self):
-        return "Touch(x={0}, y={1}, dx={2}, dy={3}, angle={4})".format(self.x, self.y, self.dx, self.dy, self.angle)
+        return (
+                "Touch(x={0}, y={1}, dx={2}, dy={3}, angle={4})"
+        ).format(self.x, self.y, self.dx, self.dy, self.angle)
 
 
 class TouchScreen(Button):
@@ -28,10 +30,8 @@ class TouchScreen(Button):
         _touches = _nx.hid_get_touches()
         touch_list = []
         for touch in _touches:
-            print(touch)
             touch_list.append(Touch(*touch))
         return touch_list
 
 
 screen = TouchScreen()
-

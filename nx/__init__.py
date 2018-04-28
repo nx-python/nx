@@ -23,4 +23,3 @@ class _Titles:
 
 
 titles = _Titles()
-

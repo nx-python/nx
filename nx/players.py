@@ -28,4 +28,3 @@ p5 = Player(5)
 p6 = Player(6)
 p7 = Player(7)
 p8 = Player(8)
-
