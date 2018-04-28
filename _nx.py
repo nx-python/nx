@@ -12,5 +12,9 @@ def hid_keys_pressed(player_id: int):
     return 0
 
 
+def hid_get_touches():
+    return ((640, 360, 10, 10, 0),)
+
+
 def account_get_active_user():
     return 0

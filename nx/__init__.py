@@ -1,25 +1,13 @@
 import _nx
 
+from .players import *
 from .audio import *
 from .controllers import Button
+from .touch import screen
 from .title import *
-from .players import *
 
 
 _nx.account_initialize()
-
-
-p1 = Player(1)
-p2 = Player(2)
-p3 = Player(3)
-p4 = Player(4)
-p5 = Player(5)
-p6 = Player(6)
-p7 = Player(7)
-p8 = Player(8)
-
-
-screen = Button(p1, 26)
 
 
 class _Titles:
@@ -35,3 +23,4 @@ class _Titles:
 
 
 titles = _Titles()
+
