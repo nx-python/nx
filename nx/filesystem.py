@@ -4,8 +4,8 @@ import _nx
 from . import users
 
 
-SAVEDATA_BASE_PATH = 'save:/'
-ROMFS_BASE_PATH = 'romfs:/'
+SAVEDATA_BASE_PATH = ''
+ROMFS_BASE_PATH = ''
 
 
 mounted_romfs = None
@@ -57,8 +57,18 @@ class MountableFileSystem(FileSystem):
     def mount(self):
         raise NotImplementedError
 
+    def commit(self):
+        raise NotImplementedError
+
     def unmount(self):
         raise NotImplementedError
+
+    def __enter__(self):
+        self.mount()
+
+    def __exit__(self):
+        self.commit()
+        self.unmount()
 
 
 class RomFS(MountableFileSystem):
@@ -74,7 +84,10 @@ class RomFS(MountableFileSystem):
         raise NotImplementedError  # TODO: implement RomFS.mount
 
     def unmount(self):
-        raise NotImplementedError  # TODO: implement RomFS.unmount
+        _nx.fsdev_unmount_device('romfs')
+
+    def __exit__(self):
+        self.unmount()
 
 
 class Savedata(MountableFileSystem):
@@ -93,7 +106,10 @@ class Savedata(MountableFileSystem):
         if self.user is None:
             raise users.NoActiveUser("No active user, you need to launch and "
                                      "close a game prior to launching HBL.")
-        _nx.fs_mount_savedata("save", self.title.id, self.user.id)
+        _nx.fs_mount_savedata('save', self.title.id, self.user.id)
+
+    def commit(self):
+        _nx.fsdev_commit_device('save')
 
     def unmount(self):
-        raise NotImplementedError  # TODO: implement Savedata.unmount
+        _nx.fsdev_unmount_device('save')

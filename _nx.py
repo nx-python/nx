@@ -6,6 +6,14 @@ def fs_mount_savedata(name: str, title_id: int, user_id: int):
     pass
 
 
+def fsdev_unmount_device(mountpoint: str):
+    pass
+
+
+def fsdev_commit_device(mountpoint: str):
+    pass
+
+
 def hid_keys_pressed(player_id: int):
     if player_id < 0 or player_id > 7:
         raise ValueError
