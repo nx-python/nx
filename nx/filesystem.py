@@ -4,8 +4,8 @@ import _nx
 from . import users
 
 
-SAVEDATA_BASE_PATH = ''
-ROMFS_BASE_PATH = ''
+SAVEDATA_BASE_PATH = 'save:/'
+ROMFS_BASE_PATH = 'romfs:/'
 
 
 mounted_romfs = None
