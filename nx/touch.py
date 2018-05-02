@@ -12,9 +12,7 @@ class Touch:
         self.angle = angle
 
     def __repr__(self):
-        return (
-                "Touch(x={0}, y={1}, dx={2}, dy={3}, angle={4})"
-        ).format(self.x, self.y, self.dx, self.dy, self.angle)
+        return "Touch(x={0.x}, y={0.y}, dx={0.dx}, dy={0.dy}, angle={0.angle})".format(self)
 
 
 class TouchScreen(Button):
