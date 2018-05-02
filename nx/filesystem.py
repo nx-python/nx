@@ -12,22 +12,6 @@ mounted_romfs = None
 mounted_savedata = None
 
 
-def wait_for_romfs_mount():
-    raise NotImplementedError  # TODO: implement wait_for_romfs_mount
-
-
-def wait_for_savedata_mount():
-    raise NotImplementedError  # TODO: implement wait_for_savedata_mount
-
-
-def wait_for_romfs_unmount():
-    raise NotImplementedError  # TODO: implement wait_for_romfs_unmount
-
-
-def wait_for_savedata_unmount():
-    raise NotImplementedError  # TODO: implement wait_for_savedata_unmount
-
-
 class FileSystem:
     def __init__(self, base_path: str):
         self.base_path = pathlib.Path(base_path)

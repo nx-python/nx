@@ -2,7 +2,7 @@ import _nx
 
 from .players import *
 from .audio import *
-from .controllers import Button
+from .controllers import Button, ButtonGroup
 from .touch import screen
 from .title import *
 
