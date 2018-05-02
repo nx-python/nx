@@ -1,4 +1,5 @@
 import _nx
+import sys
 
 from .cached_properties import *
 
