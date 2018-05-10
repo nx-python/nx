@@ -38,7 +38,6 @@ __version__ = '1.4.0'
 __license__ = 'BSD'
 
 from time import time
-import threading
 try:
     import asyncio
 except ImportError:
@@ -71,32 +70,6 @@ class cached_property(object):
             obj.__dict__[self.func.__name__] = future
             return future
         return wrapper()
-
-
-class threaded_cached_property(object):
-    """
-    A cached_property version for use in environments where multiple threads
-    might concurrently try to access the property.
-    """
-
-    def __init__(self, func):
-        self.__doc__ = getattr(func, '__doc__')
-        self.func = func
-        self.lock = threading.RLock()
-
-    def __get__(self, obj, cls):
-        if obj is None:
-            return self
-
-        obj_dict = obj.__dict__
-        name = self.func.__name__
-        with self.lock:
-            try:
-                # check if the value was computed before the lock was acquired
-                return obj_dict[name]
-            except KeyError:
-                # if not, do the calculation and release the lock
-                return obj_dict.setdefault(name, self.func(obj))
 
 
 class cached_property_with_ttl(object):
@@ -152,26 +125,7 @@ class cached_property_with_ttl(object):
             self.__name__ = func.__name__
             self.__module__ = func.__module__
 
+
 # Aliases to make cached_property_with_ttl easier to use
 cached_property_ttl = cached_property_with_ttl
 timed_cached_property = cached_property_with_ttl
-
-
-class threaded_cached_property_with_ttl(cached_property_with_ttl):
-    """
-    A cached_property version for use in environments where multiple threads
-    might concurrently try to access the property.
-    """
-
-    def __init__(self, ttl=None):
-        super(threaded_cached_property_with_ttl, self).__init__(ttl)
-        self.lock = threading.RLock()
-
-    def __get__(self, obj, cls):
-        with self.lock:
-            return super(threaded_cached_property_with_ttl, self).__get__(obj,
-                                                                          cls)
-
-# Alias to make threaded_cached_property_with_ttl easier to use
-threaded_cached_property_ttl = threaded_cached_property_with_ttl
-timed_threaded_cached_property = threaded_cached_property_with_ttl
