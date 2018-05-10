@@ -6,14 +6,14 @@ SAVEGAME_PATH = '0/save_game.sav'
 
 
 def main():
-    botw = nx.titles[BOTW_TITLE_ID]
+    nx.filesystem.SAVEDATA_BASE_PATH = ''
+    nx.filesystem.ROMFS_BASE_PATH = ''
 
-    if not nx.p1.any_pressed():
-        print("no button pressed")
+    botw = nx.titles[BOTW_TITLE_ID]
 
     try:
         with botw.savedata.open(SAVEGAME_PATH) as savegame:
-            pass
+            pass  # TODO: Modify the savegame
     except FileNotFoundError:
         print("No such file:", SAVEGAME_PATH)
 

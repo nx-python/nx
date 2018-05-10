@@ -1,5 +1,6 @@
 import _nx
 import sys
+import time
 
 from .cached_properties import *
 
@@ -13,26 +14,30 @@ class Singleton(type):
         return cls._instances[cls]
 
 
-class AnsiMenu():
+def bit(n: int):
+    return 1 << n
+
+
+class AnsiMenu:
     """ANSI menu by DavidBuchanan314"""
 
     CONTROLLER_P1_AUTO = 10
     KEY_A = 1
     KEY_UP = 0x222000
     KEY_DOWN = 0x888000
+    selected_idx = 0
 
     def __init__(self, entries, console=sys.stdout.buffer):
         self.entries = entries
         self.console = console
 
     def query(self):
-        self.selected_idx = 0
         self.render()
 
         while True:
             if self.poll_input():
                 break
-            time.sleep(0.05)
+            time.sleep(0.01)
 
         self.console.write(b"\x1b[%dB" % (len(self.entries)-self.selected_idx))
         self.console.flush()

@@ -14,7 +14,11 @@ def fsdev_commit_device(mountpoint: str):
     pass
 
 
-def hid_keys_pressed(player_id: int):
+def hid_scan_input():
+    pass
+
+
+def hid_keys_down(player_id: int):
     if player_id < 0 or player_id > 7:
         raise ValueError
     return 0

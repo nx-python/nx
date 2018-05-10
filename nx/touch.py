@@ -1,5 +1,7 @@
 from .controllers import Button
 from .players import p1
+from .utils import bit
+
 import _nx
 
 
@@ -17,11 +19,7 @@ class Touch:
 
 class TouchScreen(Button):
     def __init__(self):
-        self._button = Button(p1, 26)
-
-    @property
-    def is_pressed(self):
-        return self._button.is_pressed
+        super().__init__(p1, bit(26))
 
     @property
     def touches(self):
