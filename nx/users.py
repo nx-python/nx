@@ -1,14 +1,12 @@
 import _nx
+import warnings
 
 
-class NoActiveUser(Exception):
-    pass
+_nx.account_initialize()
 
 
 class User:
     def __init__(self, id):
-        if id is None:
-            raise NoActiveUser("No active user, you need to launch and close a game prior to launching HBL.")
         self.id = id
 
     @property
@@ -18,5 +16,6 @@ class User:
 
 try:
     active_user = User(_nx.account_get_active_user())
-except NoActiveUser:
+except OSError:
+    warnings.warn(Warning, "No active user, you need to launch and close a game prior to launching HBL.")
     active_user = None
