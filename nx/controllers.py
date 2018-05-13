@@ -12,6 +12,31 @@ def _determine_controller_type(player):
 class Controller:
     """
     Represents a standard type of controller
+
+    :attribute: player
+    :type: Player
+
+    <todo>
+
+    :attribute: a_button
+    :type: Button
+
+    The A button of the controller
+
+    :attribute: b_button
+    :type: Button
+
+    The B button of the controller
+
+    :attribute: x_button
+    :type: Button
+
+    The X button of the controller
+
+    :attribute: y_button
+    :type: Button
+
+    The Y button of the controller
     """
     def __init__(self, player):
         self.player = player
@@ -22,6 +47,14 @@ class Controller:
 
     @staticmethod
     def from_player(player):
+        """
+        <todo>
+        
+        :param player: player param
+
+        :returns: <todo> Controller class
+        :rtype: Controller
+        """
         controller_class = _determine_controller_type(player)
         return controller_class(player)
 
@@ -29,6 +62,41 @@ class Controller:
 class JoyconController(Controller):
     """
     Represents a single Joycon controller
+
+    :attribute: is_left
+    :type: bool
+
+    Whether the controller is the left or right Joycon
+
+    :attribute: parent
+    :type: <todo>
+
+    The parent of the controller
+
+    :attribute: stick_button
+    :type: Button
+
+    <todo>
+    
+    :attribute: l_or_r_button
+    :type: Button
+
+    <todo>
+
+    :attribute: zl_or_zr_button
+    :type: Button
+
+    <todo>
+
+    :attribute: plus_or_minus_button
+    :type: Button
+
+    <todo>
+
+    :attribute: stick
+    :type: Stick
+
+    <todo>
     """
     def __init__(self, player, is_left, parent=None):
         super().__init__(player)
@@ -92,7 +160,7 @@ class StandardController(Controller):
 
 class SwitchProController(StandardController):
     """
-    Unimplemented class
+    Yet to be implemented
     """
     pass
 
@@ -128,7 +196,8 @@ class Button:
     @staticmethod
     def from_buttons(*buttons):
         """
-        THIS FUNCTION IS DEPRECATED
+        **THIS FUNCTION IS DEPRECATED**
+
         The function may be removed in a following release. Please construct a ButtonGroup instead.
         """
         warnings.warn("Usage of Button.from_buttons is deprecated, "
