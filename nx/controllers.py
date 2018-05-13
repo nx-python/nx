@@ -274,7 +274,7 @@ class Stick:
     @property
     def left(self):
         """
-        :return: A boolean indicating whether or not the stick is in the left position
+        :return: A value indicating whether or not the stick is in the left position
         :rtype: bool
         """
         return self.x < 0.0
@@ -282,7 +282,7 @@ class Stick:
     @property
     def right(self):
         """
-        :return: A boolean indicating whether or not the stick is in the right position
+        :return: A value indicating whether or not the stick is in the right position
         :rtype: bool
         """
         return self.x > 0.0
@@ -290,7 +290,7 @@ class Stick:
     @property
     def up(self):
         """
-        :return: A boolean indicating whether or not the stick is in the up position
+        :return: A value indicating whether or not the stick is in the up position
         :rtype: bool
         """
         return self.y > 0.0
@@ -298,7 +298,7 @@ class Stick:
     @property
     def down(self):
         """
-        :return: A boolean indicating whether or not the stick is in the down position
+        :return: A value indicating whether or not the stick is in the down position
         :rtype: bool
         """
         return self.y < 0.0
@@ -323,7 +323,7 @@ class Stick:
     def y(self):
         """
         The current y value of the analogue stick
-        
+     
         :return: The float value of the stick's y location.
         :rtype: float
         """

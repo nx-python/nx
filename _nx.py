@@ -1,20 +1,35 @@
 def account_initialize():
+    """
+    Yet to be implemented
+    """
     pass
 
 
 def fs_mount_savedata(name: str, title_id: int, user_id: int):
+    """
+    Yet to be implemented
+    """
     pass
 
 
 def fsdev_unmount_device(mountpoint: str):
+    """
+    Yet to be implemented
+    """
     pass
 
 
 def fsdev_commit_device(mountpoint: str):
+    """
+    Yet to be implemented
+    """
     pass
 
 
 def hid_scan_input():
+    """
+    Yet to be implemented
+    """
     pass
 
 
@@ -29,4 +44,7 @@ def hid_get_touches():
 
 
 def account_get_active_user():
+    """
+    Yet to be implemented
+    """
     return 0

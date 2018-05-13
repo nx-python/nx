@@ -56,18 +56,31 @@ class MountableFileSystem(FileSystem):
 
 
 class RomFS(MountableFileSystem):
+    """
+    The filesystem of a ROM
+    """
     def __init__(self, title):
         super().__init__(ROMFS_BASE_PATH)
         self.title = title
 
     @property
     def is_mounted(self):
+        """
+        :return: Whether the specific RomFS is mounted
+        :rtype: bool
+        """
         return self is mounted_romfs
 
     def mount(self):
+        """
+        Yet to be implemented
+        """
         raise NotImplementedError  # TODO: implement RomFS.mount
 
     def unmount(self):
+        """
+        Unmounts a mounted ROM filesystem
+        """
         _nx.fsdev_unmount_device('romfs')
 
     def __exit__(self):

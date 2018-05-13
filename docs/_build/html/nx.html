@@ -344,7 +344,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A boolean indicating whether or not the stick is in the down position</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A value indicating whether or not the stick is in the down position</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
 </tr>
@@ -359,7 +359,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A boolean indicating whether or not the stick is in the left position</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A value indicating whether or not the stick is in the left position</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
 </tr>
@@ -374,7 +374,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A boolean indicating whether or not the stick is in the right position</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A value indicating whether or not the stick is in the right position</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
 </tr>
@@ -389,7 +389,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A boolean indicating whether or not the stick is in the up position</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A value indicating whether or not the stick is in the up position</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
 </tr>
@@ -502,20 +502,33 @@
 <dt id="nx.filesystem.RomFS">
 <em class="property">class </em><code class="descclassname">nx.filesystem.</code><code class="descname">RomFS</code><span class="sig-paren">(</span><em>title</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nx/filesystem.html#RomFS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nx.filesystem.RomFS" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nx.filesystem.MountableFileSystem" title="nx.filesystem.MountableFileSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">nx.filesystem.MountableFileSystem</span></code></a></p>
+<p>The filesystem of a ROM</p>
 <dl class="attribute">
 <dt id="nx.filesystem.RomFS.is_mounted">
 <code class="descname">is_mounted</code><a class="headerlink" href="#nx.filesystem.RomFS.is_mounted" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Whether the specific RomFS is mounted</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="nx.filesystem.RomFS.mount">
 <code class="descname">mount</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nx/filesystem.html#RomFS.mount"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nx.filesystem.RomFS.mount" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Yet to be implemented</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="nx.filesystem.RomFS.unmount">
 <code class="descname">unmount</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nx/filesystem.html#RomFS.unmount"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nx.filesystem.RomFS.unmount" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Unmounts a mounted ROM filesystem</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -598,7 +611,17 @@
 <dl class="attribute">
 <dt id="nx.users.User.is_active">
 <code class="descname">is_active</code><a class="headerlink" href="#nx.users.User.is_active" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Whether the specified user is the current active user</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </dd></dl>
 

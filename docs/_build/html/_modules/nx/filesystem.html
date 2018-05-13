@@ -89,18 +89,31 @@
 
 
 <div class="viewcode-block" id="RomFS"><a class="viewcode-back" href="../../nx.html#nx.filesystem.RomFS">[docs]</a><span class="k">class</span> <span class="nc">RomFS</span><span class="p">(</span><span class="n">MountableFileSystem</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The filesystem of a ROM</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">ROMFS_BASE_PATH</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_mounted</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: Whether the specific RomFS is mounted</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span> <span class="ow">is</span> <span class="n">mounted_romfs</span>
 
 <div class="viewcode-block" id="RomFS.mount"><a class="viewcode-back" href="../../nx.html#nx.filesystem.RomFS.mount">[docs]</a>    <span class="k">def</span> <span class="nf">mount</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Yet to be implemented</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>  <span class="c1"># TODO: implement RomFS.mount</span></div>
 
 <div class="viewcode-block" id="RomFS.unmount"><a class="viewcode-back" href="../../nx.html#nx.filesystem.RomFS.unmount">[docs]</a>    <span class="k">def</span> <span class="nf">unmount</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Unmounts a mounted ROM filesystem</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">_nx</span><span class="o">.</span><span class="n">fsdev_unmount_device</span><span class="p">(</span><span class="s1">&#39;romfs&#39;</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
