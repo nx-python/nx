@@ -10,6 +10,9 @@ def _determine_controller_type(player):
 
 
 class Controller:
+    """
+    Represents a standard type of controller
+    """
     def __init__(self, player):
         self.player = player
         self.a_button = Button(self.player, bit(0))
@@ -24,6 +27,9 @@ class Controller:
 
 
 class JoyconController(Controller):
+    """
+    Represents a single Joycon controller
+    """
     def __init__(self, player, is_left, parent=None):
         super().__init__(player)
         self.is_left = is_left
@@ -85,10 +91,16 @@ class StandardController(Controller):
 
 
 class SwitchProController(StandardController):
+    """
+    Unimplemented class
+    """
     pass
 
 
 class DualJoyconController(StandardController):
+    """
+    Represents both Joycon controllers when attached to the console
+    """
     def __init__(self, player):
         super().__init__(player)
         self.is_attached = True
@@ -97,24 +109,38 @@ class DualJoyconController(StandardController):
 
 
 class FreeDualJoyconController(DualJoyconController):
+    """
+    Represents both joycon controllers when detached from the console
+    """
     def __init__(self, player):
         super().__init__(player)
         self.is_attached = False
 
 
 class Button:
+    """
+    Represents a specific button on the Joycons
+    """
     def __init__(self, player, *key_bits):
         self.player = player
         self.key_bits = key_bits
 
     @staticmethod
     def from_buttons(*buttons):
+        """
+        THIS FUNCTION IS DEPRECATED
+        The function may be removed in a following release. Please construct a ButtonGroup instead.
+        """
         warnings.warn("Usage of Button.from_buttons is deprecated, "
                       "construct a ButtonGroup instead", DeprecationWarning)
         return ButtonGroup(*buttons)
 
     @property
     def is_pressed(self):
+        """
+        :return: A boolean indicating whether the button is pressed
+        :rtype: bool
+        """
         return any_pressed(self.player, self)
 
     def __eq__(self, other):
@@ -139,6 +165,9 @@ class ButtonGroup(Button):
 
 
 class Stick:
+    """
+    Represents the analogue stick on the controller
+    """
     def __init__(self, player, is_left):
         self.player = player
         self.is_left = is_left
@@ -155,22 +184,44 @@ class Stick:
 
     @property
     def left(self):
+        """
+        :return: A boolean indicating whether or not the stick is in the left position
+        :rtype: bool
+        """
         return self.x < 0.0
 
     @property
     def right(self):
+        """
+        :return: A boolean indicating whether or not the stick is in the right position
+        :rtype: bool
+        """
         return self.x > 0.0
 
     @property
     def up(self):
+        """
+        :return: A boolean indicating whether or not the stick is in the up position
+        :rtype: bool
+        """
         return self.y > 0.0
 
     @property
     def down(self):
+        """
+        :return: A boolean indicating whether or not the stick is in the down position
+        :rtype: bool
+        """
         return self.y < 0.0
 
     @property
     def x(self):
+        """
+        The current x value of the analogue stick
+
+        :return: The float value of the stick's x location.
+        :rtype: float
+        """
         _nx.hid_scan_input()
         keys_pressed = _nx.hid_keys_down(self.player.number - 1)
         if keys_pressed & self.left_key_bit:
@@ -181,6 +232,12 @@ class Stick:
 
     @property
     def y(self):
+        """
+        The current y value of the analogue stick
+        
+        :return: The float value of the stick's y location.
+        :rtype: float
+        """
         _nx.hid_scan_input()
         keys_pressed = _nx.hid_keys_down(self.player.number - 1)
         if keys_pressed & self.up_key_bit:
