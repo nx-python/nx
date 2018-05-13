@@ -76,25 +76,45 @@ class JoyconController(Controller):
     :attribute: stick_button
     :type: Button
 
-    <todo>
+    The button located in the analogue stick, when it is pressed.
     
     :attribute: l_or_r_button
     :type: Button
 
-    <todo>
+    Either the L or R button on the controller, dependent on which Joycon.
 
     :attribute: zl_or_zr_button
     :type: Button
 
-    <todo>
+    Either the ZL or ZR button on the controller, dependent on which Joycon.
 
     :attribute: plus_or_minus_button
     :type: Button
 
-    <todo>
+    Either the plus or minus button on the controller, dependent on which Joycon.
 
     :attribute: stick
     :type: Stick
+
+    The analogue stick of the controller
+
+    :attribute: left
+    :type: Button
+
+    <todo>
+
+    :attribute: right
+    :type: Button
+
+    <todo>
+
+    :attribute: up
+    :type: Button
+
+    <todo>
+
+    :attribute: down
+    :type: Button
 
     <todo>
     """
