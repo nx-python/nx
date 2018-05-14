@@ -4,6 +4,14 @@ import warnings
 from .utils import bit, cached_property
 
 
+def refresh_inputs():
+    """Refreshes inputs.
+    Should normally be called at least once
+    within every iteration of your main loop.
+    """
+    _nx.hid_scan_input()
+
+
 def _determine_controller_type(player):
     # TODO determine the type of the controller for this player via _nx
     return DualJoyconController
@@ -187,18 +195,17 @@ class SwitchProController(StandardController):
 
 class DualJoyconController(StandardController):
     """Represents two Joy-Cons in combination, attached to rails"""
+    is_attached = True
+
     def __init__(self, player):
         super().__init__(player)
-        self.is_attached = True
         self.left_joycon = JoyconController(player, is_left=True, parent=self)
         self.right_joycon = JoyconController(player, is_left=False, parent=self)
 
 
 class FreeDualJoyconController(DualJoyconController):
     """Represents two Joy-Cons in combination, detached from rails"""
-    def __init__(self, player):
-        super().__init__(player)
-        self.is_attached = False
+    is_attached = False
 
 
 class Button:
@@ -242,7 +249,7 @@ class ButtonGroup(Button):
 
     @property
     def pressed(self):
-        return which_pressed(self.player, self.buttons)
+        return which_pressed(self.player, *self.buttons)
 
 
 class Stick:
@@ -301,7 +308,6 @@ class Stick:
         :return: The float value of the stick's x location.
         :rtype: float
         """
-        _nx.hid_scan_input()
         keys_pressed = _nx.hid_keys_down(self.player.number - 1)
         if keys_pressed & self.left_key_bit:
             return -1.0
@@ -317,7 +323,6 @@ class Stick:
         :return: The float value of the stick's y location.
         :rtype: float
         """
-        _nx.hid_scan_input()
         keys_pressed = _nx.hid_keys_down(self.player.number - 1)
         if keys_pressed & self.up_key_bit:
             return 1.0
@@ -326,7 +331,7 @@ class Stick:
         return 0.0
 
 
-def any_pressed(player, *buttons: Button, refresh_input=True):
+def any_pressed(player, *buttons: Button, refresh_input=False):
     """Checks if any of the given buttons are pressed, or if
     any buttons are pressed at all in case no buttons are given.
 
@@ -339,10 +344,10 @@ def any_pressed(player, *buttons: Button, refresh_input=True):
     refresh_input: Optional[bool]
         Whether or not to check for new inputs.
         Checks with inputs from last refresh if False.
-        Defaults to True.
+        Defaults to False.
     """
     if refresh_input:
-        _nx.hid_scan_input()
+        refresh_inputs()
     keys_pressed = _nx.hid_keys_down(player.number - 1)
     if len(buttons) == 0:
         return not keys_pressed == 0
@@ -353,7 +358,7 @@ def any_pressed(player, *buttons: Button, refresh_input=True):
     return False
 
 
-def is_pressed(player, button: Button, refresh_input=True):
+def is_pressed(player, button: Button, refresh_input=False):
     """Checks if any of the given buttons are pressed, or if
     any buttons are pressed at all in case no buttons are given.
 
@@ -366,12 +371,12 @@ def is_pressed(player, button: Button, refresh_input=True):
     refresh_input: Optional[bool]
         Whether or not to check for new inputs.
         Checks with inputs from last refresh if False.
-        Defaults to True.
+        Defaults to False.
     """
     return any_pressed(player, button, refresh_input=refresh_input)
 
 
-def which_pressed(player, *buttons: Button, refresh_input=True):
+def which_pressed(player, *buttons: Button, refresh_input=False):
     """Checks which of the given buttons are pressed.
 
     Parameters
@@ -383,7 +388,7 @@ def which_pressed(player, *buttons: Button, refresh_input=True):
     refresh_input: Optional[bool]
         Whether or not to check for new inputs.
         Checks with inputs from last refresh if False.
-        Defaults to True.
+        Defaults to False.
 
     Returns
     -------
@@ -394,4 +399,12 @@ def which_pressed(player, *buttons: Button, refresh_input=True):
     keys_pressed = _nx.hid_keys_down(player.number - 1)
     if not buttons:
         raise TypeError("At least one Button must be passed")
-    return [button for button in buttons if keys_pressed & button.key_bit]
+    if refresh_input:
+        refresh_inputs()
+    keys_pressed = _nx.hid_keys_down(player.number - 1)
+    buttons_pressed = []
+    for button in buttons:
+        for key_bit in button.key_bits:
+            if keys_pressed & key_bit:
+                buttons_pressed.append(button)
+    return buttons_pressed

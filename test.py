@@ -8,8 +8,8 @@ OUTPUT_PATH = 'botw_0_game_data.sav'
 
 
 def main():
-    nx.filesystem.SAVEDATA_BASE_PATH = ''
-    nx.filesystem.ROMFS_BASE_PATH = ''
+    nx.filesystem.SAVEDATA_BASE_PATH = '../save/'
+    nx.filesystem.ROMFS_BASE_PATH = '../romfs/'
 
     botw = nx.titles[BOTW_TITLE_ID]  # get botw Title object
 

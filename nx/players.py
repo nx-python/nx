@@ -41,7 +41,7 @@ class Player:
             except AttributeError:
                 return None
 
-    def any_pressed(self, *buttons, refresh_input=True):
+    def any_pressed(self, *buttons, refresh_input=False):
         return _any_pressed(self, *buttons, refresh_input=refresh_input)
 
 

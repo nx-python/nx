@@ -142,9 +142,11 @@ class Savedata(MountableFileSystem):
         if self.is_mounted:
             return
         if self.user is None:
-            raise users.NoActiveUser("No active user, you need to launch and "
-                                     "close a game prior to launching HBL.")
+            raise RuntimeError("No active user, you need to launch and "
+                               "close a game prior to launching HBL.")
         _nx.fs_mount_savedata('save', self.title.id, self.user.id)
+        global mounted_savedata  # TODO: consider not using globals
+        mounted_savedata = self
 
     def commit(self):
         """Commits the savedata filesystem."""
