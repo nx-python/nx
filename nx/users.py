@@ -6,11 +6,22 @@ _nx.account_initialize()
 
 
 class User:
+    """Represents a user who is registered on the Switch.
+
+    Attributes
+    ----------
+    id: int
+        The user ID.
+    """
     def __init__(self, id):
         self.id = id
 
     @property
     def is_active(self):
+        """
+        :returns: Whether the specified user is the current active user
+        :rtype: bool
+        """
         return self.id == active_user.id
 
 
