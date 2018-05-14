@@ -24,11 +24,17 @@ class FileSystem:
 
 
 class MountableFileSystem(FileSystem):
+    """
+    Represents a File System that is able to be mounted. The class provides methods for mounting and manipulating the filesystem.
+    """
     def __init__(self, base_path):
         super().__init__(base_path)
 
     @property
     def is_mounted(self):
+        """
+        Yet to be implemented
+        """
         raise NotImplementedError
 
     def open(self, file_path: str, mode='r', buffering=-1, encoding=None,
@@ -39,12 +45,21 @@ class MountableFileSystem(FileSystem):
                             errors=errors, newline=newline)
 
     def mount(self):
+        """
+        Yet to be implemented
+        """
         raise NotImplementedError
 
     def commit(self):
+        """
+        Yet to be implemented
+        """
         raise NotImplementedError
 
     def unmount(self):
+        """
+        Yet to be implemented
+        """
         raise NotImplementedError
 
     def __enter__(self):
@@ -88,6 +103,9 @@ class RomFS(MountableFileSystem):
 
 
 class Savedata(MountableFileSystem):
+    """
+    Represents a game's savedata on a specified MountableFileSystem.
+    """
     def __init__(self, title, user=None):
         super().__init__(SAVEDATA_BASE_PATH)
         self.title = title
@@ -95,9 +113,16 @@ class Savedata(MountableFileSystem):
 
     @property
     def is_mounted(self):
+        """
+        :return: Whether the savedata itself has been mounted.
+        :rtype: bool
+        """
         return self is mounted_savedata
 
     def mount(self):
+        """
+        Mounts the savedata.
+        """
         if self.is_mounted:
             return
         if self.user is None:
@@ -109,4 +134,7 @@ class Savedata(MountableFileSystem):
         _nx.fsdev_commit_device('save')
 
     def unmount(self):
+        """
+        Unmounts the savedata.
+        """
         _nx.fsdev_unmount_device('save')

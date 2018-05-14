@@ -49,8 +49,8 @@ class Controller:
     def from_player(player):
         """
         <todo>
-        
-        :param player: player param
+
+        :param player: <todo>
 
         :returns: <todo> Controller class
         :rtype: Controller
@@ -77,7 +77,7 @@ class JoyconController(Controller):
     :type: Button
 
     The button located in the analogue stick, when it is pressed.
-    
+
     :attribute: l_or_r_button
     :type: Button
 
@@ -101,22 +101,22 @@ class JoyconController(Controller):
     :attribute: left
     :type: Button
 
-    <todo>
+    The analogue stick in the left position
 
     :attribute: right
     :type: Button
 
-    <todo>
+    The analogue stick in the right position
 
     :attribute: up
     :type: Button
 
-    <todo>
+    The analogue stick in the up position
 
     :attribute: down
     :type: Button
 
-    <todo>
+    The analogue stick in the down position
     """
     def __init__(self, player, is_left, parent=None):
         super().__init__(player)
@@ -239,6 +239,9 @@ class Button:
 
 
 class ButtonGroup(Button):
+    """
+    <todo>
+    """
     def __init__(self, *buttons):
         if not buttons:
             raise TypeError("At least one Button must be passed")
@@ -323,7 +326,7 @@ class Stick:
     def y(self):
         """
         The current y value of the analogue stick
-     
+
         :return: The float value of the stick's y location.
         :rtype: float
         """

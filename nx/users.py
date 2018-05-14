@@ -6,6 +6,9 @@ _nx.account_initialize()
 
 
 class User:
+    """
+    <todo>
+    """
     def __init__(self, id):
         self.id = id
 
