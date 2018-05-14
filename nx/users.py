@@ -6,8 +6,12 @@ _nx.account_initialize()
 
 
 class User:
-    """
-    <todo>
+    """Represents a user who is registered on the Switch.
+
+    Attributes
+    ----------
+    id: int
+        The user ID.
     """
     def __init__(self, id):
         self.id = id

@@ -1,3 +1,1 @@
-"""
-Yet to be implemented
-"""
+"""Yet to be implemented."""

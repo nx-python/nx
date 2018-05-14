@@ -11,32 +11,32 @@ def _determine_controller_type(player):
 
 class Controller:
     """
-    Represents a standard type of controller
+    Represents an abstract controller.
 
     :attribute: player
     :type: Player
 
-    <todo>
+    The player to whom the Controller belongs to.
 
     :attribute: a_button
     :type: Button
 
-    The A button of the controller
+    The A button of the controller.
 
     :attribute: b_button
     :type: Button
 
-    The B button of the controller
+    The B button of the controller.
 
     :attribute: x_button
     :type: Button
 
-    The X button of the controller
+    The X button of the controller.
 
     :attribute: y_button
     :type: Button
 
-    The Y button of the controller
+    The Y button of the controller.
     """
     def __init__(self, player):
         self.player = player
@@ -61,17 +61,17 @@ class Controller:
 
 class JoyconController(Controller):
     """
-    Represents a single Joycon controller
+    Represents a single Joycon controller.
 
     :attribute: is_left
     :type: bool
 
-    Whether the controller is the left or right Joycon
+    Whether the JoyconController is the left or right Joy-Con.
 
     :attribute: parent
     :type: <todo>
 
-    The parent of the controller
+    The parent Controller of the Joy-Con.
 
     :attribute: stick_button
     :type: Button
@@ -81,42 +81,42 @@ class JoyconController(Controller):
     :attribute: l_or_r_button
     :type: Button
 
-    Either the L or R button on the controller, dependent on which Joycon.
+    Either the L or R button on the controller, dependent on which Joy-Con.
 
     :attribute: zl_or_zr_button
     :type: Button
 
-    Either the ZL or ZR button on the controller, dependent on which Joycon.
+    Either the ZL or ZR button on the controller, dependent on which Joy-Con.
 
     :attribute: plus_or_minus_button
     :type: Button
 
-    Either the plus or minus button on the controller, dependent on which Joycon.
+    Either the + or - button on the controller, dependent on which Joy-Con.
 
     :attribute: stick
     :type: Stick
 
-    The analogue stick of the controller
+    The analogue stick of the controller.
 
     :attribute: left
     :type: Button
 
-    The analogue stick in the left position
+    The analogue stick in the left position.
 
     :attribute: right
     :type: Button
 
-    The analogue stick in the right position
+    The analogue stick in the right position.
 
     :attribute: up
     :type: Button
 
-    The analogue stick in the up position
+    The analogue stick in the up position.
 
     :attribute: down
     :type: Button
 
-    The analogue stick in the down position
+    The analogue stick in the down position.
     """
     def __init__(self, player, is_left, parent=None):
         super().__init__(player)
@@ -179,16 +179,14 @@ class StandardController(Controller):
 
 
 class SwitchProController(StandardController):
-    """
-    Yet to be implemented
+    """Represents a Switch Pro Controller.
+    Can also be a similar controller with the same buttons.
     """
     pass
 
 
 class DualJoyconController(StandardController):
-    """
-    Represents both Joycon controllers when attached to the console
-    """
+    """Represents two Joy-Cons in combination, attached to rails"""
     def __init__(self, player):
         super().__init__(player)
         self.is_attached = True
@@ -197,28 +195,24 @@ class DualJoyconController(StandardController):
 
 
 class FreeDualJoyconController(DualJoyconController):
-    """
-    Represents both joycon controllers when detached from the console
-    """
+    """Represents two Joy-Cons in combination, detached from rails"""
     def __init__(self, player):
         super().__init__(player)
         self.is_attached = False
 
 
 class Button:
-    """
-    Represents a specific button on the Joycons
-    """
+    """Represents a button or button-like object."""
     def __init__(self, player, *key_bits):
         self.player = player
         self.key_bits = key_bits
 
     @staticmethod
     def from_buttons(*buttons):
-        """
-        **THIS FUNCTION IS DEPRECATED**
+        """Creates a virtual button using multiple buttons.
 
-        The function may be removed in a following release. Please construct a ButtonGroup instead.
+        .. deprecated: 0.3.2
+            Construct a :class:`ButtonGroup` instead.
         """
         warnings.warn("Usage of Button.from_buttons is deprecated, "
                       "construct a ButtonGroup instead", DeprecationWarning)
@@ -226,10 +220,7 @@ class Button:
 
     @property
     def is_pressed(self):
-        """
-        :return: A boolean indicating whether the button is pressed
-        :rtype: bool
-        """
+        """Indicates whether the Button is pressed."""
         return any_pressed(self.player, self)
 
     def __eq__(self, other):
@@ -239,9 +230,7 @@ class Button:
 
 
 class ButtonGroup(Button):
-    """
-    <todo>
-    """
+    """Represents a group of :class:`Button` objects."""
     def __init__(self, *buttons):
         if not buttons:
             raise TypeError("At least one Button must be passed")
@@ -257,9 +246,7 @@ class ButtonGroup(Button):
 
 
 class Stick:
-    """
-    Represents the analogue stick on the controller
-    """
+    """Represents the analogue stick on the controller."""
     def __init__(self, player, is_left):
         self.player = player
         self.is_left = is_left
@@ -340,6 +327,20 @@ class Stick:
 
 
 def any_pressed(player, *buttons: Button, refresh_input=True):
+    """Checks if any of the given buttons are pressed, or if
+    any buttons are pressed at all in case no buttons are given.
+
+    Parameters
+    ----------
+    player: :class:`Player`
+        The player to check with.
+    buttons: Optional[one or more :class:`Button` objects OR Tuple[Button]]
+        Buttons to check for. Checks if no Button is pressed if none given.
+    refresh_input: Optional[bool]
+        Whether or not to check for new inputs.
+        Checks with inputs from last refresh if False.
+        Defaults to True.
+    """
     if refresh_input:
         _nx.hid_scan_input()
     keys_pressed = _nx.hid_keys_down(player.number - 1)
@@ -353,10 +354,41 @@ def any_pressed(player, *buttons: Button, refresh_input=True):
 
 
 def is_pressed(player, button: Button, refresh_input=True):
+    """Checks if any of the given buttons are pressed, or if
+    any buttons are pressed at all in case no buttons are given.
+
+    Parameters
+    ----------
+    player: :class:`Player`
+        The player to check with.
+    button: :class:`Button`
+        Button to check for.
+    refresh_input: Optional[bool]
+        Whether or not to check for new inputs.
+        Checks with inputs from last refresh if False.
+        Defaults to True.
+    """
     return any_pressed(player, button, refresh_input=refresh_input)
 
 
 def which_pressed(player, *buttons: Button, refresh_input=True):
+    """Checks which of the given buttons are pressed.
+
+    Parameters
+    ----------
+    player: :class:`Player`
+        The player to check with.
+    buttons: one or more :class:`Button` objects OR Tuple[Button]
+        Buttons to check for.
+    refresh_input: Optional[bool]
+        Whether or not to check for new inputs.
+        Checks with inputs from last refresh if False.
+        Defaults to True.
+
+    Returns
+    -------
+    A list of :class:`Button` objects.
+    """
     if refresh_input:
         _nx.hid_scan_input()
     keys_pressed = _nx.hid_keys_down(player.number - 1)
