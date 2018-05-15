@@ -5,12 +5,12 @@
 
 nx documentation
 ==============================
-nx is a Python library to handle interactions with the Switch device.
+The nx package comes bundled with Pynx and is available for import and usage in your Python homebrew applications. It allows you to access Switch-specific elements, such as buttons, audio etc., via a high-level, object-oriented wrapper around the libnxmodule.
 
 Support
 ----------------------
 
-* For module specific info, try the :ref:`genindex` or :ref:`modindex`.
+* For module specific info, try the :ref:`genindex` or :doc:`nx`.
 * For any help or further assistance please visit the `PyNX discord`_.
 
 Additional Material
