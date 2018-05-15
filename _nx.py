@@ -1,3 +1,6 @@
+import nx
+
+
 def account_initialize():
     """Initializes the account service."""
     pass
@@ -17,7 +20,7 @@ def fs_mount_savedata(name: str, title_id: int, user_id: int):
     user_id: int
         The user ID of the user whose savedata filesystem to mount.
     """
-    pass
+    nx.filesystem.SAVEDATA_BASE_PATH = '../save/'
 
 
 def fsdev_unmount_device(mountpoint: str):

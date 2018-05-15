@@ -76,8 +76,9 @@ class MountableFileSystem(FileSystem):
 
     def __enter__(self):
         self.mount()
+        return self
 
-    def __exit__(self):
+    def __exit__(self, exc_type, exc_val, exc_tb):
         self.commit()
         self.unmount()
 
@@ -111,7 +112,7 @@ class RomFS(MountableFileSystem):
         """Unmounts the mounted RomFS."""
         _nx.fsdev_unmount_device('romfs')
 
-    def __exit__(self):
+    def __exit__(self, exc_type, exc_val, exc_tb):
         self.unmount()
 
 
@@ -150,6 +151,7 @@ class Savedata(MountableFileSystem):
 
     def commit(self):
         """Commits the savedata filesystem."""
+        print(_nx.__dict__)
         _nx.fsdev_commit_device('save')
 
     def unmount(self):
