@@ -151,7 +151,6 @@ class Savedata(MountableFileSystem):
 
     def commit(self):
         """Commits the savedata filesystem."""
-        print(_nx.__dict__)
         _nx.fsdev_commit_device('save')
 
     def unmount(self):
