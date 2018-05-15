@@ -3,8 +3,10 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to nx's documentation!
+nx
 ==============================
+
+nx is a Python library to handle interactions with the Switch device.
 
 .. toctree::
    :maxdepth: 2
