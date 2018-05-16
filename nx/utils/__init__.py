@@ -2,7 +2,8 @@ import _nx
 import sys
 import time
 
-from .cached_properties import *
+from .cached_properties import (cached_property, cached_property_with_ttl,
+                                cached_property_ttl, timed_cached_property)
 
 
 class Singleton(type):
