@@ -4,6 +4,9 @@ import warnings
 from .utils import bit, cached_property
 
 
+AUTO_PLAYER_1_ID = 10
+
+
 def refresh_inputs():
     """Refreshes inputs.
     Should normally be called at least once
@@ -308,7 +311,7 @@ class Stick:
         :return: The float value of the stick's x location.
         :rtype: float
         """
-        keys_pressed = _nx.hid_keys_down(self.player.number - 1)
+        keys_pressed = _nx.hid_keys_down(self.player.number - 1 if self.player.number != 1 else AUTO_PLAYER_1_ID)
         if keys_pressed & self.left_key_bit:
             return -1.0
         if keys_pressed & self.right_key_bit:
@@ -323,7 +326,7 @@ class Stick:
         :return: The float value of the stick's y location.
         :rtype: float
         """
-        keys_pressed = _nx.hid_keys_down(self.player.number - 1)
+        keys_pressed = _nx.hid_keys_down(self.player.number - 1 if self.player.number != 1 else AUTO_PLAYER_1_ID)
         if keys_pressed & self.up_key_bit:
             return 1.0
         if keys_pressed & self.down_key_bit:
@@ -348,7 +351,7 @@ def any_pressed(player, *buttons: Button, refresh_input=False):
     """
     if refresh_input:
         refresh_inputs()
-    keys_pressed = _nx.hid_keys_down(player.number - 1)
+    keys_pressed = _nx.hid_keys_down(player.number - 1 if player.number != 1 else AUTO_PLAYER_1_ID)
     if len(buttons) == 0:
         return not keys_pressed == 0
     for button in buttons:
@@ -396,12 +399,12 @@ def which_pressed(player, *buttons: Button, refresh_input=False):
     """
     if refresh_input:
         _nx.hid_scan_input()
-    keys_pressed = _nx.hid_keys_down(player.number - 1)
+    keys_pressed = _nx.hid_keys_down(player.number - 1 if player.number != 1 else AUTO_PLAYER_1_ID)
     if not buttons:
         raise TypeError("At least one Button must be passed")
     if refresh_input:
         refresh_inputs()
-    keys_pressed = _nx.hid_keys_down(player.number - 1)
+    keys_pressed = _nx.hid_keys_down(player.number - 1 if player.number != 1 else AUTO_PLAYER_1_ID)
     buttons_pressed = []
     for button in buttons:
         for key_bit in button.key_bits:
