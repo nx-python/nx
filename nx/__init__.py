@@ -1,7 +1,6 @@
 from .players import *
-from .audio import *
-from .controllers import Button, ButtonGroup
-from .touch import screen
+from .controllers import ButtonGroup, refresh_inputs
+from .touch import screen as touchscreen
 from .title import *
 
 
