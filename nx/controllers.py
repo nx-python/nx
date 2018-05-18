@@ -217,17 +217,6 @@ class Button:
         self.player = player
         self.key_bits = key_bits
 
-    @staticmethod
-    def from_buttons(*buttons):
-        """Creates a virtual button using multiple buttons.
-
-        .. deprecated: 0.3.2
-            Construct a :class:`ButtonGroup` instead.
-        """
-        warnings.warn("Usage of Button.from_buttons is deprecated, "
-                      "construct a ButtonGroup instead", DeprecationWarning)
-        return ButtonGroup(*buttons)
-
     @property
     def is_pressed(self):
         """Indicates whether the Button is pressed."""
