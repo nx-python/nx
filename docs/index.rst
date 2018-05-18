@@ -11,14 +11,11 @@ Getting Started
   :caption: Getting Started
   :hidden:
   getting_started/installation
-  getting_started/building
   getting_started/tutorial
   getting_started/examples
 
 :doc:`getting_started/installation`
   How to install nx-python on you Switch or Switch Emulator
-:doc:`getting_started/building`
-  How to build nx-python directly from source
 :doc:`getting_started/tutorial`
   A guided tutorial on how to use nx-python for your project
 :doc:`getting_started/examples`
