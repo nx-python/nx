@@ -12,9 +12,9 @@ Switch
 
 Yuzu
 ------------------
-1. Install Yuzu emulator from their Github repo <todo: insert a link here>.
+1. Install Yuzu emulator from their `Github repo <https://github.com/yuzu-emu/yuzu>`_ or `webpage <https://yuzu-emu.org/>`_.
 2. Run Yuzu at least once so that it can create default directories.
-3. Build an nx-python release, or download one from here <todo: insert nx-python release page link>.
+3. Build an PyNX release, or download one from `here <https://github.com/nx-python/nx/releases>`_.
 4. Extract the nx-python files into Yuzu's sdmc directory.
     - On Windows this directory is located in ``C:/Users/<USER>/AppData/Roaming/yuzu/sdmc``
     - <todo: add location for other operating systems>
