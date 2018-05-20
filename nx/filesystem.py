@@ -1,4 +1,5 @@
 import pathlib
+import shutil
 import _nx
 
 from . import users
@@ -156,3 +157,18 @@ class Savedata(MountableFileSystem):
     def unmount(self):
         """Unmounts the savedata filesystem."""
         _nx.fsdev_unmount_device('save')
+
+    def backup(self, destination: str=None):
+        """Creates a backup of the savedata.
+        
+        Parameters
+        ----------
+        destination: str
+            Directory path where the backup will be created.
+            If the directory doesn't exist already, it will be created.
+            The operation will fail if the directory already exists and is not empty.
+            Defaults to '/backups/savedata/{title_id}/'.
+        """
+        title_id = hex(self.title.id)[2:]
+        destination = '/backups/savedata/{}/'.format(title_id) if destination is None else destination
+        return shutil.copytree(self.base_path, destination)
