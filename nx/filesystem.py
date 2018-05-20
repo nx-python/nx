@@ -171,4 +171,4 @@ class Savedata(MountableFileSystem):
         """
         title_id = hex(self.title.id)[2:]
         destination = '/backups/savedata/{}/'.format(title_id) if destination is None else destination
-        return shutil.copytree(self.base_path, destination)
+        return shutil.copytree(str(self.base_path), destination)
