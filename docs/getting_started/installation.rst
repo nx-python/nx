@@ -8,7 +8,13 @@ Installating nx-python
 
 Switch
 ------------------
+**You require a Switch with access to the Homebrew Launcher**
 
+1. Insert the SD card into your development device.
+2. Copy the content of the `zip release <https://github.com/nx-python/PyNX/releases>`_ into the ``/switch`` directory on your SD card.
+3. Edit the main.py file within the extracted contents.
+4. Insert the SD card back into the Switch.
+5. Run PyNX from the Homebrew launcher
 
 Yuzu
 ------------------
