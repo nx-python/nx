@@ -8,10 +8,62 @@ This quick tutorial will explain how you can use the nx package. We will start w
 
 Pre-requisites
 ------------------
-* A Switch device or Switch Emulator
-* PyNX installed on said device
 
-The Code
+1. A Switch device with access to the homebrew launcher **or** a compatible switch emulator. For help setting up the former, visit:
+    * `Switch Hacks Guide <https://switch.hacks.guide/>`_
+    * `Nintendo Homebrew Discord <https://discord.gg/C29hYvh>`_
+    * `nx-python Discord <https://discord.gg/5Ga2Whf>`_
+
+2. A device that you can develop Python applications on (preferably a desktop/laptop though it *is possible* on a mobile device)
+
+3. An integrated development environment eg.
+    * Visual Studio Code (Recommended)
+    * PyCharm (Recommended)
+    * Eclipse with PyDev
+    * IDLE
+    * Pydroid 3 (Android 4.4+)
+    * Pythonista 3 (iOS 9.0+)
+
+4. A basic understanding of Python 3.x+, there are many resources for learning Python including the ones below:
+    * `Learn Python The Hard Way <https://learnpythonthehardway.org/>`_
+    * `The Modern Python 3 Bootcamp <https://www.udemy.com/the-modern-python3-bootcamp/>`_
+    * `SoloLearn <https://www.sololearn.com/Course/Python/>`_
+    * `Python Discord <https://pythondiscord.com/>`_
+    * `nx-python Discord <https://discord.gg/5Ga2Whf>`_
+
+5. A Git installation for your operating system
+
+To get started with nx-python, you will need to install the latest release of PyNX on your device. See :doc:`installation` for more information.
+
+Starting development
+------------------
+
+To start developing, first clone the ``nx`` repository with the following command:
+
+``git clone https://github.com/nx-python/nx.git``
+
+There are three ways to run a Python program on your device.
+
+Firstly, you can launch your IDE and open the freshly cloned repository as a workspace/project. Then open and edit ``test.py``. (Note: Controller input can not yet be tested on your development machine.)
+
+**or**
+
+You can test Python code on the Switch using a TCP REPL script located in ``examples/tcp_repl.py``.
+You should use this script as your ``main.py`` to be able to run Python code from your PC to the switch.
+
+After you launch PyNX on the device, connect to your switch via a TCP client on port 1337. The IP address can be found in your Switch's settings under the "Internet" tab.
+
+On Linux you can connect with the following command:
+
+``rlwrap cat | tee log.py | nc <SWITCH_IP> 1337``
+
+This command will also log the inputs to a file called ``log.py``.
+
+**or**
+
+You can run an ftp server such as `ftpd <https://github.com/TuxSH/ftpd/tree/switch_pr>`_ (releases `here <https://www.switchbru.com/appstore/#/app/ftpd>`_) on your Switch and replace the main.py file using an FTP client.
+
+A Simple Savedata Backup tool
 ------------------
 
 Firstly, we need to import some libraries to begin work on our homebrew app, primarily the nx package.
