@@ -65,7 +65,9 @@ A Simple Savedata Backup tool
 We will start with a simple homebrew app that allows the user to backup the savedata of a selection of games.
 
 Firstly, we need to import some libraries to begin work on our homebrew app, primarily the nx package.
-We also want to show a selection menu to the user, so we should import the AnsiMenu utility class as well: ::
+We also want to show a selection menu to the user, so we should import the AnsiMenu utility class as well:
+
+.. code:: python
 
     import nx
     from nx.utils import AnsiMenu
