@@ -26,6 +26,9 @@ Getting Started
 Support
 ----------------------
 
+:doc:`support/faq`
+  Answers to common questions that may help you
+
 * For module specific info, try the :ref:`genindex` or
   the documentation of the :doc:`nx`.
 * For any help or further assistance. please visit the
