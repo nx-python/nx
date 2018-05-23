@@ -15,11 +15,11 @@ Getting Started
   getting_started/examples
 
 :doc:`getting_started/installation`
-  How to install nx-python on your Switch or Switch emulator
+  How to install nx-python on your Switch or Switch emulator.
 :doc:`getting_started/tutorial`
-  A guided tutorial on how to use nx-python for your project
+  A guided tutorial on how to use nx-python for your project.
 :doc:`getting_started/examples`
-  Look at code examples if you prefer learning that way
+  Look at code examples if you prefer learning that way.
 
 
 
@@ -27,7 +27,10 @@ Support
 ----------------------
 
 :doc:`support/faq`
-  Answers to common questions that may help you
+  Answers to common questions that may help you.
+
+:doc:`suport/contributing`
+  Advice on how you can help out and contribute to the nx-python project.
 
 * For module specific info, try the :ref:`genindex` or
   the documentation of the :doc:`nx`.
@@ -37,6 +40,7 @@ Support
 Additional Material
 ----------------------
 * `libnx documentation <https://switchbrew.github.io/libnx/index.html>`_
+* `Python 3.5 documentation <https://docs.python.org/3.5/>`_
 
 .. _nx-python Discord server: https://discord.gg/5Ga2Whf
 
