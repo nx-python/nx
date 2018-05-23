@@ -25,11 +25,14 @@ Getting Started
 
 Support
 ----------------------
+.. toctree::
+  :caption: Support
+  :hidden:
 
 :doc:`support/faq`
   Answers to common questions that may help you.
 
-:doc:`suport/contributing`
+:doc:`support/contributing`
   Advice on how you can help out and contribute to the nx-python project.
 
 * For module specific info, try the :ref:`genindex` or
@@ -39,15 +42,14 @@ Support
 
 Additional Material
 ----------------------
+.. toctree::
+  :caption: Additional Material
+  :hidden:
+
 * `libnx documentation <https://switchbrew.github.io/libnx/index.html>`_
 * `Python 3.5 documentation <https://docs.python.org/3.5/>`_
 
 .. _nx-python Discord server: https://discord.gg/5Ga2Whf
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-
 
 
 Indices and tables
