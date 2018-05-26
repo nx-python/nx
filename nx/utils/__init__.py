@@ -19,6 +19,10 @@ def bit(n: int):
     return 1 << n
 
 
+def clear_terminal():
+    print(chr(27) + "[2J")
+
+
 class AnsiMenu:
     """ANSI menu by DavidBuchanan314"""
 
