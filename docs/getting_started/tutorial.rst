@@ -26,7 +26,7 @@ Pre-requisites
     * Pythonista 3 (iOS 9.0+)
 
 4. A basic understanding of Python 3. There are many resources for learning Python including the ones below:
-    * **If you are new to programming and want to learn how to code in Python,** `check out this course on Udemy <https://www.udemy.com/automate/?couponCode=FOR_LIKE_10_BUCKS>`_ **($10 instead of $50)**
+    * If you are new to programming and want to learn how to code in Python, `this Udemy course <https://www.udemy.com/automate/?couponCode=FOR_LIKE_10_BUCKS>`_ gets you started.
     * `Python Discord Resources Page <https://pythondiscord.com/info/resources>`_
     * `nx-python Discord <https://discord.gg/5Ga2Whf>`_ (Just ask, we're always happy to help!)
 
@@ -65,7 +65,7 @@ We will start with a simple homebrew app that allows the user to backup the save
 Firstly, we need to import some libraries to begin work on our homebrew app, primarily the nx package.
 We also want to show a selection menu to the user, so we should import the AnsiMenu utility class as well:
 
-.. code:: python
+.. code::
 
     import nx
     from nx.utils import AnsiMenu

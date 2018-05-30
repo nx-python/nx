@@ -6,17 +6,16 @@ Frequently Asked Questions
 
 What versions of Python are supported?
 ------------------
-Currently, only Python version 3.5 is supported.
+Currently, Python version 3.5 is supported.
 
-Where can I get the most up-to-date version of nx-python?
+Where can I get the most up-to-date, cutting edge version of PyNX?
 ------------------
-You can build it yourself `from the source <https://github.com/nx-python/nx>`_, or `download a release <https://github.com/nx-python/nx/releases>`_.
+You can build it yourself `from the source <https://github.com/nx-python/PyNX>`_. (Requires the devkitA64 toolchain.)
 
-Does nx-python have a REPL interface?
+Does nx-python have an interactive interpreter I can use?
 ------------------
-Yes! Just use the ``tcp_repl.py`` file. You can then connect to it by connecting to your Switch through TCP port 1337. More information on this procedure can be found in the :doc:`../getting_started/tutorial`.
+Yes, check the :doc:`../getting_started/tutorial`.
 
-Can I run this on emulators such as Yuzu and Ryujinx?
+Can I run this on an emulator such as Yuzu or RyujiNX?
 ------------------
-Yes, an installation tutorial for these emulators is available on the :doc:`../getting_started/installation` page. Please keep in mind that you may experience issue that you might not otherwise on a physical device.
-
+Yes, an installation tutorial for these emulators is available on the :doc:`../getting_started/installation` page.

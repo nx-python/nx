@@ -99,6 +99,7 @@ html_static_path = ['_static']
 # 'searchbox.html']``.
 #
 # html_sidebars = {}
+highlight_language = 'python3'
 
 
 # -- Options for HTMLHelp output ---------------------------------------------

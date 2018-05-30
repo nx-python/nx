@@ -4,7 +4,7 @@
 Contributing to nx-python
 ==================
 
-There are a variety of ways in which you can help the nx-python project, listed below.
+There is a variety of ways in which you can help the nx-python project, listed below.
 
 
 Submitting code
@@ -20,6 +20,4 @@ The request will then be checked and potentially merged into the master branch. 
 
 Reporting issues
 ------------------
-You can report any issues you find on the `issues page of the nx-python repository <https://github.com/nx-python/nx>`_.
-
-Before submitting an issue, please check that it has not already been reported. Please also make sure that your issue is not addressed in the :doc:`faq`.
+You can report any issues you find on the `Discord server <https://discord.gg/5Ga2Whf>`_. However, before you do, check if the :doc:`faq` don't cover thie issue already.

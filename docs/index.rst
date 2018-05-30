@@ -33,7 +33,7 @@ Support
   Answers to common questions that may help you.
 
 :doc:`support/contributing`
-  Advice on how you can help out and contribute to the nx-python project.
+  Instructions on how you can help out and contribute to the nx-python project.
 
 * For module specific info, try the :ref:`genindex` or
   the documentation of the :doc:`nx`.
