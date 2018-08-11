@@ -21,7 +21,7 @@ Yuzu
 1. Install the Yuzu emulator if you haven't already. You can build it from `source <https://github.com/yuzu-emu/yuzu>`_ or get a pre-compiled build from `their website <https://yuzu-emu.org/downloads/>`_.
 2. Run Yuzu at least once so that it can create default directories.
 3. Build PyNX from `source <https://github.com/nx-python/PyNX>`_, or download a release build from `here <https://github.com/nx-python/PyNX/releases>`_.
-4. Extract the nx-python files into Yuzu's sdmc directory.
+4. Extract the nx-python files into a folder named 'switch' located in Yuzu's sdmc directory.
     - On Windows this directory is located in ``C:/Users/{USER}/AppData/Roaming/yuzu/sdmc``.
     - On Linux and OS X it is located in ``~/.local/share/yuzu-emu/``.
 5. Edit the main.py file as you wish, then launch the PyNX.nro with Yuzu.
