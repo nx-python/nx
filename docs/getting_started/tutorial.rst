@@ -39,13 +39,13 @@ To start developing, first clone the ``nx`` repository using the following comma
 
 ``git clone https://github.com/nx-python/nx.git``
 
-or by simply `downloading a ZIP version of the source code from GitHub <https://github.com/nx-python/nx/master.zip>`_. There are three ways to test your Python homebrew software.
+or by simply `downloading a ZIP version of the source code from GitHub <https://github.com/nx-python/nx/archive/master.zip>`_. There are three ways to test your Python homebrew software.
 
 Firstly, you can launch your IDE and open the freshly cloned repository as a workspace/project. Then open and edit ``test.py``, and run it normally. (Note: Controller input can not yet be tested on your development device.) The included dummy version of the `_nx module <https://github.com/nx-python/_nx>`_ will serve as a substitute to make your homebrew app work like a regular Python app.
 
 **or**
 
-You can test Python code on the Switch using the `TCP REPL script <https://github.com/nx-python/PyNX/blob/examples/tcp_repl.py>`_.
+You can test Python code on the Switch using the `TCP REPL script <https://github.com/nx-python/PyNX/blob/master/examples/tcp_repl.py>`_.
 Use it as your ``main.py`` to be able to enter Python code from your PC to be executed on the Switch via an interactive prompt.
 
 After you launch PyNX on the device, connect to your Switch via a TCP client on port 1337. The IP address can be found in your Switch's settings under the "Internet" tab. On Linux, you can connect with the following command:
@@ -56,7 +56,7 @@ This command will also log the inputs to a file called ``log.py``.
 
 **or**
 
-You can run an FTP server such as `ftpd <https://github.com/TuxSH/ftpd/tree/switch_pr>`_ (`releases <https://www.switchbru.com/appstore/#/app/ftpd>`_) on your Switch and replace ``main.py`` using an FTP client.
+You can run an FTP server such as `ftpd <https://github.com/TuxSH/ftpd/tree/switch>`_ (`releases <https://www.switchbru.com/appstore/#/app/ftpd>`_) on your Switch and replace ``main.py`` using an FTP client.
 
 A Simple Savedata Backup tool
 ------------------
