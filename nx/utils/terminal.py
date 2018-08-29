@@ -9,11 +9,13 @@ from io import StringIO
 import contextlib
 import logging
 
-from .screen import Screen
-from .keyboard import Keyboard
-from .python import Python
-from .menu import Settings
-from .utils import Utils
+# Absolute path is needed. Otherwise we have import errors
+# On startup
+from nx.utils.terminal_src.screen import Screen
+from nx.utils.terminal_src.keyboard import Keyboard
+from nx.utils.terminal_src.python import Python
+from nx.utils.terminal_src.menu import Settings
+from nx.utils.terminal_src.utils import Utils
 
 @contextlib.contextmanager
 def stdoutIO(stdout=None):
