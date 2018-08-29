@@ -9,6 +9,7 @@ from io import StringIO
 import contextlib
 import logging
 
+<<<<<<< HEAD:nx/utils/terminal.py
 # Absolute path is needed. Otherwise we have import errors
 # On startup
 from nx.utils.terminal_src.screen import Screen
@@ -16,6 +17,13 @@ from nx.utils.terminal_src.keyboard import Keyboard
 from nx.utils.terminal_src.python import Python
 from nx.utils.terminal_src.menu import Settings
 from nx.utils.terminal_src.utils import Utils
+=======
+from .screen import Screen
+from .keyboard import Keyboard
+from .python import Python
+from .menu import Settings
+from .utils import Utils
+>>>>>>> 8f81c0b6125787ee9eac30bc3f2c2320cebda639:nx/utils/terminal/__init__.py
 
 @contextlib.contextmanager
 def stdoutIO(stdout=None):
@@ -36,8 +44,6 @@ def stderrIO(stderr=None):
     sys.stderr = old
 
 class Terminal(Screen, Keyboard):
-
-
     def __str__(self):
         return "Terminal for the switch, made by PuffDip"
 
@@ -243,6 +249,9 @@ class Terminal(Screen, Keyboard):
             imgui.end()
             imgui.render()
             self.renderer.render()
+<<<<<<< HEAD:nx/utils/terminal.py
 
         # Without this one switch seems to crash
         self.renderer.shutdown()
+=======
+>>>>>>> 8f81c0b6125787ee9eac30bc3f2c2320cebda639:nx/utils/terminal/__init__.py
