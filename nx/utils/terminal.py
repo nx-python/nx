@@ -155,7 +155,7 @@ class Terminal(Screen, Keyboard):
             # Create a button "Export"
             if imgui.button("Export", width=200, height=60):
                 export_check = "".join(self.utils.export(self.cli_history))
-                self.input = str(export_check)
+                self.cli_history.append(export_check)
 
             # push style
             imgui.pop_style_color(1)
