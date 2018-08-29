@@ -54,7 +54,7 @@ class Terminal(Screen, Keyboard):
 
         # Debug setting && Version Number
         self.DEBUG = True
-        self.version_number = '0.1'
+        self.version_number = '0.2'
 
         # Set log settings
         if self.DEBUG:
@@ -67,13 +67,6 @@ class Terminal(Screen, Keyboard):
         self.CONSOLE_TEXT = "Python {} on Nintendo Switch\n\n>>>".format(sys.version)
         # A check to see if the terminal just started or not
         self.just_booted = True
-
-
-
-
-
-        # Something with the command, TODO refactor
-        self.user_input = [self.CONSOLE_TEXT]
 
     def main(self):
         """
