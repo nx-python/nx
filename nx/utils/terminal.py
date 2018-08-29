@@ -9,11 +9,11 @@ from io import StringIO
 import contextlib
 import logging
 
-from nx.utils.terminal_src.screen import Screen
-from nx.utils.terminal_src.keyboard import Keyboard
-from nx.utils.terminal_src.python import Python
-from nx.utils.terminal_src.menu import Settings
-from nx.utils.terminal_src.utils import Utils
+from .screen import Screen
+from .keyboard import Keyboard
+from .python import Python
+from .menu import Settings
+from .utils import Utils
 
 @contextlib.contextmanager
 def stdoutIO(stdout=None):
@@ -242,4 +242,5 @@ class Terminal(Screen, Keyboard):
             imgui.render()
             self.renderer.render()
 
+        # Without this one switch seems to crash
         self.renderer.shutdown()
