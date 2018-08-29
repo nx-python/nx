@@ -9,8 +9,6 @@ from io import StringIO
 import contextlib
 import logging
 
-# Absolute path is needed. Otherwise we have import errors
-# On startup
 from nx.utils.terminal_src.screen import Screen
 from nx.utils.terminal_src.keyboard import Keyboard
 from nx.utils.terminal_src.python import Python
@@ -43,8 +41,8 @@ class Terminal(Screen, Keyboard):
 
     def __init__(self):
         # Debug setting && Version Number
-        self.DEBUG = False
-        self.version_number = '0.2A'
+        self.DEBUG = True
+        self.version_number = '0.2'
 
         # Useful static variables
         self.currentDir = os.getcwd()
@@ -54,12 +52,11 @@ class Terminal(Screen, Keyboard):
 
         # Set log settings
         if self.DEBUG:
-            # lib/python3.5/nx/utils/terminal.log
             logging.basicConfig(filename='lib/python3.5/nx/utils/terminal.log',
                                 format='%(levelname)s:%(message)s',
                                 level=logging.DEBUG)
         else:
-            logging.basicConfig(filename='terminal.log',
+            logging.basicConfig(filename='lib/python3.5/nx/utils/terminal.log',
                                 format='%(levelname)s:%(message)s',
                                 level=logging.ERROR)
 
@@ -244,5 +241,4 @@ class Terminal(Screen, Keyboard):
             imgui.render()
             self.renderer.render()
 
-        # Without this one switch seems to crash
         self.renderer.shutdown()
