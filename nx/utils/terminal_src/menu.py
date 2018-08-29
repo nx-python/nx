@@ -1,6 +1,5 @@
 import imgui
 
-
 def colorToFloat(self, t):
     """
     Used to convert RGB to a float value
@@ -14,10 +13,11 @@ def colorToFloat(self, t):
 
 
 class Settings(object):
-    def __init__(self, KEY_FUNC_COLOR, INPUT):
+    def __init__(self, KEY_FUNC_COLOR, KEY_COLOR_BLACK, INPUT):
         # Button toggles: Default = False
         self.setting_toggle = False
         self.KEY_FUNC_COLOR = KEY_FUNC_COLOR
+        self.KEY_COLOR_BLACK = KEY_COLOR_BLACK
 
         self.input = INPUT
 
@@ -35,6 +35,17 @@ class Settings(object):
         else:
             self.setting_toggle = True
 
+    def placeholder(self):
+        # Give a style to the button
+        imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_COLOR_BLACK)
+        # Create a button "PLACEHOLDER"
+        if imgui.button("...", width=self.BTN_WIDTH, height=self.BTN_HEIGHT):
+            # Execute code when button is pressed
+            pass # PLACEHOLDER
+        # push style
+        imgui.pop_style_color(1)
+
+
     def render(self):
         # Create a GUI group
         imgui.begin_group()
@@ -42,358 +53,43 @@ class Settings(object):
         """
         NEW ROW STARTS HERE ROW #1
         """
-
-        # Give a style to the button
-        imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_FUNC_COLOR)
-        # Create a button "PLACEHOLDER"
-        if imgui.button("PLACEHOLDER", width=self.BTN_WIDTH, height=self.BTN_HEIGHT):
-            # Execute code when button is pressed
-            pass
-        # push style
-        imgui.pop_style_color(1)
-
-        imgui.same_line()
-
-        # Give a style to the button
-        imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_FUNC_COLOR)
-        # Create a button "PLACEHOLDER"
-        if imgui.button("PLACEHOLDER", width=self.BTN_WIDTH, height=self.BTN_HEIGHT):
-            # Execute code when button is pressed
-            pass # PLACEHOLDER
-        # push style
-        imgui.pop_style_color(1)
-
-        imgui.same_line()
-
-        # Give a style to the button
-        imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_FUNC_COLOR)
-        # Create a button "PLACEHOLDER"
-        if imgui.button("PLACEHOLDER", width=self.BTN_WIDTH, height=self.BTN_HEIGHT):
-            # Execute code when button is pressed
-            pass # PLACEHOLDER
-        # push style
-        imgui.pop_style_color(1)
-
-        imgui.same_line()
-
-        # Give a style to the button
-        imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_FUNC_COLOR)
-        # Create a button "PLACEHOLDER"
-        if imgui.button("PLACEHOLDER", width=self.BTN_WIDTH, height=self.BTN_HEIGHT):
-            # Execute code when button is pressed
-            pass  # PLACEHOLDER
-        # push style
-        imgui.pop_style_color(1)
-
-        imgui.same_line()
-
-        # Give a style to the button
-        imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_FUNC_COLOR)
-        # Create a button "PLACEHOLDER"
-        if imgui.button("PLACEHOLDER", width=self.BTN_WIDTH, height=self.BTN_HEIGHT):
-            # Execute code when button is pressed
-            pass  # PLACEHOLDER
-        # push style
-        imgui.pop_style_color(1)
-
-        imgui.same_line()
-
-        # Give a style to the button
-        imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_FUNC_COLOR)
-        # Create a button "PLACEHOLDER"
-        if imgui.button("PLACEHOLDER", width=self.BTN_WIDTH, height=self.BTN_HEIGHT):
-            # Execute code when button is pressed
-            pass  # PLACEHOLDER
-        # push style
-        imgui.pop_style_color(1)
-
-
-
-
+        for i in range(5):
+            self.placeholder()
+            imgui.same_line()
+        self.placeholder()
 
         """
         NEW ROW STARTS HERE ROW #2
         """
-
-        # Give a style to the button
-        imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_FUNC_COLOR)
-        # Create a button "PLACEHOLDER"
-        if imgui.button("PLACEHOLDER", width=self.BTN_WIDTH, height=self.BTN_HEIGHT):
-            # Execute code when button is pressed
-            pass  # PLACEHOLDER
-        # push style
-        imgui.pop_style_color(1)
-
-        imgui.same_line()
-
-        # Give a style to the button
-        imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_FUNC_COLOR)
-        # Create a button "PLACEHOLDER"
-        if imgui.button("PLACEHOLDER", width=self.BTN_WIDTH, height=self.BTN_HEIGHT):
-            # Execute code when button is pressed
-            pass # PLACEHOLDER
-        # push style
-        imgui.pop_style_color(1)
-
-        imgui.same_line()
-
-        # Give a style to the button
-        imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_FUNC_COLOR)
-        # Create a button "PLACEHOLDER"
-        if imgui.button("PLACEHOLDER", width=self.BTN_WIDTH, height=self.BTN_HEIGHT):
-            # Execute code when button is pressed
-            pass # PLACEHOLDER
-        # push style
-        imgui.pop_style_color(1)
-
-        imgui.same_line()
-
-        # Give a style to the button
-        imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_FUNC_COLOR)
-        # Create a button "PLACEHOLDER"
-        if imgui.button("PLACEHOLDER", width=self.BTN_WIDTH, height=self.BTN_HEIGHT):
-            # Execute code when button is pressed
-            pass  # PLACEHOLDER
-        # push style
-        imgui.pop_style_color(1)
-
-        imgui.same_line()
-
-        # Give a style to the button
-        imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_FUNC_COLOR)
-        # Create a button "PLACEHOLDER"
-        if imgui.button("PLACEHOLDER", width=self.BTN_WIDTH, height=self.BTN_HEIGHT):
-            # Execute code when button is pressed
-            pass  # PLACEHOLDER
-        # push style
-        imgui.pop_style_color(1)
-
-        imgui.same_line()
-
-        # Give a style to the button
-        imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_FUNC_COLOR)
-        # Create a button "PLACEHOLDER"
-        if imgui.button("PLACEHOLDER", width=self.BTN_WIDTH, height=self.BTN_HEIGHT):
-            # Execute code when button is pressed
-            pass  # PLACEHOLDER
-        # push style
-        imgui.pop_style_color(1)
-
-
-
-
+        for i in range(5):
+            self.placeholder()
+            imgui.same_line()
+        self.placeholder()
 
         """
         NEW ROW STARTS HERE ROW #3
         """
 
-        # Give a style to the button
-        imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_FUNC_COLOR)
-        # Create a button "PLACEHOLDER"
-        if imgui.button("PLACEHOLDER", width=self.BTN_WIDTH, height=self.BTN_HEIGHT):
-            # Execute code when button is pressed
-            pass  # PLACEHOLDER
-        # push style
-        imgui.pop_style_color(1)
-
-        imgui.same_line()
-
-        # Give a style to the button
-        imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_FUNC_COLOR)
-        # Create a button "PLACEHOLDER"
-        if imgui.button("PLACEHOLDER", width=self.BTN_WIDTH, height=self.BTN_HEIGHT):
-            # Execute code when button is pressed
-            pass  # PLACEHOLDER
-        # push style
-        imgui.pop_style_color(1)
-
-        imgui.same_line()
-
-        # Give a style to the button
-        imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_FUNC_COLOR)
-        # Create a button "PLACEHOLDER"
-        if imgui.button("PLACEHOLDER", width=self.BTN_WIDTH, height=self.BTN_HEIGHT):
-            # Execute code when button is pressed
-            pass  # PLACEHOLDER
-        # push style
-        imgui.pop_style_color(1)
-
-        imgui.same_line()
-
-        # Give a style to the button
-        imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_FUNC_COLOR)
-        # Create a button "PLACEHOLDER"
-        if imgui.button("PLACEHOLDER", width=self.BTN_WIDTH, height=self.BTN_HEIGHT):
-            # Execute code when button is pressed
-            pass  # PLACEHOLDER
-        # push style
-        imgui.pop_style_color(1)
-
-        imgui.same_line()
-
-        # Give a style to the button
-        imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_FUNC_COLOR)
-        # Create a button "PLACEHOLDER"
-        if imgui.button("PLACEHOLDER", width=self.BTN_WIDTH, height=self.BTN_HEIGHT):
-            # Execute code when button is pressed
-            pass  # PLACEHOLDER
-        # push style
-        imgui.pop_style_color(1)
-
-        imgui.same_line()
-
-        # Give a style to the button
-        imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_FUNC_COLOR)
-        # Create a button "PLACEHOLDER"
-        if imgui.button("PLACEHOLDER", width=self.BTN_WIDTH, height=self.BTN_HEIGHT):
-            # Execute code when button is pressed
-            pass  # PLACEHOLDER
-        # push style
-        imgui.pop_style_color(1)
-
-
-
-
-
+        for i in range(5):
+            self.placeholder()
+            imgui.same_line()
+        self.placeholder()
 
         """
         NEW ROW STARTS HERE ROW #4
         """
 
-        # Give a style to the button
-        imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_FUNC_COLOR)
-        # Create a button "PLACEHOLDER"
-        if imgui.button("PLACEHOLDER", width=self.BTN_WIDTH, height=self.BTN_HEIGHT):
-            # Execute code when button is pressed
-            pass  # PLACEHOLDER
-        # push style
-        imgui.pop_style_color(1)
-
-        imgui.same_line()
-
-        # Give a style to the button
-        imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_FUNC_COLOR)
-        # Create a button "PLACEHOLDER"
-        if imgui.button("PLACEHOLDER", width=self.BTN_WIDTH, height=self.BTN_HEIGHT):
-            # Execute code when button is pressed
-            pass  # PLACEHOLDER
-        # push style
-        imgui.pop_style_color(1)
-
-        imgui.same_line()
-
-        # Give a style to the button
-        imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_FUNC_COLOR)
-        # Create a button "PLACEHOLDER"
-        if imgui.button("PLACEHOLDER", width=self.BTN_WIDTH, height=self.BTN_HEIGHT):
-            # Execute code when button is pressed
-            pass  # PLACEHOLDER
-        # push style
-        imgui.pop_style_color(1)
-
-        imgui.same_line()
-
-        # Give a style to the button
-        imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_FUNC_COLOR)
-        # Create a button "PLACEHOLDER"
-        if imgui.button("PLACEHOLDER", width=self.BTN_WIDTH, height=self.BTN_HEIGHT):
-            # Execute code when button is pressed
-            pass  # PLACEHOLDER
-        # push style
-        imgui.pop_style_color(1)
-
-        imgui.same_line()
-
-        # Give a style to the button
-        imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_FUNC_COLOR)
-        # Create a button "PLACEHOLDER"
-        if imgui.button("PLACEHOLDER", width=self.BTN_WIDTH, height=self.BTN_HEIGHT):
-            # Execute code when button is pressed
-            pass  # PLACEHOLDER
-        # push style
-        imgui.pop_style_color(1)
-
-        imgui.same_line()
-
-        # Give a style to the button
-        imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_FUNC_COLOR)
-        # Create a button "PLACEHOLDER"
-        if imgui.button("PLACEHOLDER", width=self.BTN_WIDTH, height=self.BTN_HEIGHT):
-            # Execute code when button is pressed
-            pass  # PLACEHOLDER
-        # push style
-        imgui.pop_style_color(1)
-
-
-
-
+        for i in range(5):
+            self.placeholder()
+            imgui.same_line()
+        self.placeholder()
 
         """
         NEW ROW STARTS HERE ROW #5
         """
-
-        # Give a style to the button
-        imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_FUNC_COLOR)
-        # Create a button "PLACEHOLDER"
-        if imgui.button("PLACEHOLDER", width=self.BTN_WIDTH, height=self.BTN_HEIGHT):
-            # Execute code when button is pressed
-            pass  # PLACEHOLDER
-        # push style
-        imgui.pop_style_color(1)
-
-        imgui.same_line()
-
-        # Give a style to the button
-        imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_FUNC_COLOR)
-        # Create a button "PLACEHOLDER"
-        if imgui.button("PLACEHOLDER", width=self.BTN_WIDTH, height=self.BTN_HEIGHT):
-            # Execute code when button is pressed
-            pass  # PLACEHOLDER
-        # push style
-        imgui.pop_style_color(1)
-
-        imgui.same_line()
-
-        # Give a style to the button
-        imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_FUNC_COLOR)
-        # Create a button "PLACEHOLDER"
-        if imgui.button("PLACEHOLDER", width=self.BTN_WIDTH, height=self.BTN_HEIGHT):
-            # Execute code when button is pressed
-            pass  # PLACEHOLDER
-        # push style
-        imgui.pop_style_color(1)
-
-        imgui.same_line()
-
-        # Give a style to the button
-        imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_FUNC_COLOR)
-        # Create a button "PLACEHOLDER"
-        if imgui.button("PLACEHOLDER", width=self.BTN_WIDTH, height=self.BTN_HEIGHT):
-            # Execute code when button is pressed
-            pass  # PLACEHOLDER
-        # push style
-        imgui.pop_style_color(1)
-
-        imgui.same_line()
-
-        # Give a style to the button
-        imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_FUNC_COLOR)
-        # Create a button "PLACEHOLDER"
-        if imgui.button("PLACEHOLDER", width=self.BTN_WIDTH, height=self.BTN_HEIGHT):
-            # Execute code when button is pressed
-            pass  # PLACEHOLDER
-        # push style
-        imgui.pop_style_color(1)
-
-        imgui.same_line()
-
-        # Give a style to the button
-        imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_FUNC_COLOR)
-        # Create a button "PLACEHOLDER"
-        if imgui.button("PLACEHOLDER", width=self.BTN_WIDTH, height=self.BTN_HEIGHT):
-            # Execute code when button is pressed
-            pass  # PLACEHOLDER
-        # push style
-        imgui.pop_style_color(1)
+        for i in range(5):
+            self.placeholder()
+            imgui.same_line()
+        self.placeholder()
 
         imgui.end_group()

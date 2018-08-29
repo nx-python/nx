@@ -1,4 +1,5 @@
 from imgui.integrations.nx import NXRenderer
+import imgui
 
 class Screen(object):
     def __str__(self):

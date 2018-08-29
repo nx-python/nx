@@ -3,8 +3,9 @@ import traceback
 import sys
 
 class Python(object):
-    def __init__(self):
+    def __init__(self, logging):
         self.TILED_DOUBLE = 1
+        self.logger = logging
 
     def execute(self, code):
         old_stdout = sys.stdout

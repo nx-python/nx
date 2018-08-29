@@ -40,6 +40,27 @@ class Terminal(Screen, Keyboard):
         return "Terminal for the switch, made by PuffDip"
 
     def __init__(self):
+        # Debug setting && Version Number
+        self.DEBUG = False
+        self.version_number = '0.2A'
+
+        # Useful static variables
+        self.currentDir = os.getcwd()
+        self.CONSOLE_TEXT = "Python {} on Nintendo Switch\n\n>>>".format(sys.version)
+        # A check to see if the terminal just started or not
+        self.just_booted = True
+
+        # Set log settings
+        if self.DEBUG:
+            # lib/python3.5/nx/utils/terminal.log
+            logging.basicConfig(filename='lib/python3.5/nx/utils/terminal.log',
+                                format='%(levelname)s:%(message)s',
+                                level=logging.DEBUG)
+        else:
+            logging.basicConfig(filename='terminal.log',
+                                format='%(levelname)s:%(message)s',
+                                level=logging.ERROR)
+
         # Initialize class as super
         Screen.__init__(self)
         # A storage for our history
@@ -47,28 +68,13 @@ class Terminal(Screen, Keyboard):
         Keyboard.__init__(self, self.cli_history)
 
         # Initialize class as object
-        self.python = Python()
-        self.utils = Utils()
+        self.python = Python(logging)
+        self.utils = Utils(logging)
 
         # Initialize menu's, usually a class object
         # Those menus are most of the time static
-        self.settings = Settings(self.KEY_FUNC_COLOR, self.input)
+        self.settings = Settings(self.KEY_FUNC_COLOR, self.KEY_COLOR_BLACK, self.input)
 
-        # Debug setting && Version Number
-        self.DEBUG = True
-        self.version_number = '0.2'
-
-        # Set log settings
-        if self.DEBUG:
-            logging.basicConfig(filename='terminal.log', format='%(levelname)s:%(message)s', level=logging.DEBUG)
-        else:
-            logging.basicConfig(filename='terminal.log', format='%(levelname)s:%(message)s', level=logging.ERROR)
-
-        # Useful static variables
-        self.currentDir = os.getcwd()
-        self.CONSOLE_TEXT = "Python {} on Nintendo Switch\n\n>>>".format(sys.version)
-        # A check to see if the terminal just started or not
-        self.just_booted = True
 
     def main(self):
         """
@@ -115,7 +121,6 @@ class Terminal(Screen, Keyboard):
                 # Show version number
                 imgui.text(self.CONSOLE_TEXT)
             else:
-                # TODO better styling for multiline code
                 if self.cli_history:
                     imgui.text("{}\n\n>>>\n{}".format("\n".join(self.cli_history), self.input))
                 else:
@@ -135,7 +140,7 @@ class Terminal(Screen, Keyboard):
                     self.render()
             # If the setting page is active show the setting page instead of rendering the keyboard
             else:
-               self.settings.render()
+                self.settings.render()
 
             # Command line
             imgui.text("Keyboard: {} | Shift: {} | SYS: {}".format(self.keyboard_toggled, self.CAPS, self.SYS))
@@ -144,7 +149,11 @@ class Terminal(Screen, Keyboard):
             imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_COLOR)
             # Create a button "Import"
             if imgui.button("Import", width=200, height=60):
-                pass # TODO make a Import method
+                # Toggle Keyboard if not already
+                if not self.keyboard_toggled:
+                    self.keyboard_toggled = True
+                #self.input = "https://pastebin.com/"
+                self.input = "dpaste:>>0CHTWFR"
             # push style
             imgui.pop_style_color(1)
 
@@ -163,9 +172,9 @@ class Terminal(Screen, Keyboard):
             imgui.same_line()
 
             # Give a style to the button
-            imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_COLOR)
+            imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_COLOR_BLACK)
             # Create a button "Cursor"
-            if imgui.button("Cursor", width=200, height=60):
+            if imgui.button("...", width=200, height=60):
                 pass # TODO Import a cursor method
             # push style
             imgui.pop_style_color(1)
@@ -184,22 +193,33 @@ class Terminal(Screen, Keyboard):
             imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_COLOR)
             # Create a button "Confirm" if the input from the user is higher then 0
             if imgui.button("Confirm", width=200, height=60) and len(self.input) > 0:
-                # Execute user command
-                out, err, exc = self.python.execute(self.input)
-                # Append user command to history
-                self.input += "\n"
-                self.cli_history.append(self.input)
-                # Check whatever the result was of the command
-                if out:
-                    self.input = out
-                if err:
-                    self.input = err
-                if exc:
-                    self.input = exc
-                # Append result to history
-                self.cli_history.append(self.input)
-                # Clear variable to get used once more
-                self.input = ""
+                # If pastebin is used
+                if self.input.startswith("dpaste:>>"):
+                    # Make a usable url
+                    url_redirecter = self.input.split(sep=":>>")[1]
+                    # Clear user input
+                    # generate url
+                    url = "http://dpaste.com/" + url_redirecter + ".txt"
+                    # Start to fetch the data
+                    self.input = self.utils.import_url(url)
+                else:
+                    # Execute user command
+                    out, err, exc = self.python.execute(self.input)
+                    # Append user command to history
+                    self.input += "\n"
+                    self.cli_history.append(self.input)
+                    # Check whatever the result was of the command
+                    if out:
+                        self.input = out
+                    if err:
+                        self.input = err
+                    if exc:
+                        self.input = exc
+                    # Append result to history
+                    self.cli_history.append(self.input)
+                    # Clear variable to get used once more
+                    self.input = ""
+
             # Push style of the button
             imgui.pop_style_color(1)
 

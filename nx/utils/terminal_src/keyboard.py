@@ -39,6 +39,7 @@ class Keyboard(object):
         # (r, g, b)
         self.KEY_COLOR = self.colorToFloat((230, 126, 34))
         self.KEY_FUNC_COLOR = self.colorToFloat((196, 107, 29))
+        self.KEY_COLOR_BLACK = self.colorToFloat((0, 0, 0))
 
         # User input, what the user types on his keyboard
         self.input = ""
