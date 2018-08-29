@@ -13,6 +13,7 @@ from nx.utils.terminal_src.screen import Screen
 from nx.utils.terminal_src.keyboard import Keyboard
 from nx.utils.terminal_src.python import Python
 from nx.utils.terminal_src.menu import Settings
+from nx.utils.terminal_src.utils import Utils
 
 @contextlib.contextmanager
 def stdoutIO(stdout=None):
@@ -47,6 +48,7 @@ class Terminal(Screen, Keyboard):
 
         # Initialize class as object
         self.python = Python()
+        self.utils = Utils()
 
         # Initialize menu's, usually a class object
         # Those menus are most of the time static
@@ -152,7 +154,9 @@ class Terminal(Screen, Keyboard):
             imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_COLOR)
             # Create a button "Export"
             if imgui.button("Export", width=200, height=60):
-                pass # TODO make a Export method
+                export_check = "".join(self.utils.export(self.cli_history))
+                self.input = str(export_check)
+
             # push style
             imgui.pop_style_color(1)
 
