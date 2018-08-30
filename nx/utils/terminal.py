@@ -41,8 +41,8 @@ class Terminal(Screen, Keyboard):
 
     def __init__(self):
         # Debug setting && Version Number
-        self.DEBUG = True
-        self.version_number = '0.2'
+        self.DEBUG = False
+        self.version_number = '0.2A'
 
         # Useful static variables
         self.currentDir = os.getcwd()
@@ -56,7 +56,7 @@ class Terminal(Screen, Keyboard):
                                 format='%(levelname)s:%(message)s',
                                 level=logging.DEBUG)
         else:
-            logging.basicConfig(filename='lib/python3.5/nx/utils/terminal.log',
+            logging.basicConfig(filename='terminal.log',
                                 format='%(levelname)s:%(message)s',
                                 level=logging.ERROR)
 
