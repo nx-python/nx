@@ -12,9 +12,12 @@ class Keyboard(object):
             nt += ((1 / 255) * v,)
         return nt
 
-    def __init__(self, cli_history):
+    def __init__(self, cli_history, logger):
         # Button toggles: Default = False
         self.keyboard_toggled = False
+
+        # Set logger
+        self.logger = logger
 
         # Assign CLI History
         self.cli_history = cli_history
@@ -37,9 +40,10 @@ class Keyboard(object):
 
         # Color based on floats
         # (r, g, b)
-        self.KEY_COLOR = self.colorToFloat((230, 126, 34))
-        self.KEY_FUNC_COLOR = self.colorToFloat((196, 107, 29))
+        self.KEY_COLOR_ORANGE = self.colorToFloat((230, 126, 34))
         self.KEY_COLOR_BLACK = self.colorToFloat((0, 0, 0))
+        self.KEY_COLOR_BGRAY = self.colorToFloat((32, 32, 32))
+        self.KEY_COLOR_LGRAY = self.colorToFloat((64, 64, 64))
 
         # User input, what the user types on his keyboard
         self.input = ""
@@ -66,7 +70,7 @@ class Keyboard(object):
         else:
             self.SYS = True
 
-    def keyboard_key(self, key:str, same_line=False, *, default:str=None, color=None):
+    def keyboard_key(self, key:str, same_line=False, *, default:str=None):
         """
         This is a multi functional function.
         Key: The key of the key
@@ -80,30 +84,35 @@ class Keyboard(object):
         if self.CAPS:
             key = key.upper()
 
-        if color is None:
-            color = self.KEY_COLOR
+        try:
+            if default == 'SHIFT' or default == 'SYS' or default == 'TAB':
+                imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_COLOR_BGRAY)
+            else:
+                imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_COLOR_LGRAY)
 
-        imgui.push_style_color(imgui.COLOR_BUTTON, *color)
-        if imgui.button(key, width=80, height=60):
-            if default is None:
-                if self.input == '':
-                    self.input = key
-                else:
-                    self.input = self.input + key
-            elif default == 'SHIFT':
-                self.shift_key()
-            elif default == 'SYS':
-                self.sys_key()
-            elif default == 'TAB':
-                if self.TAB == False:
-                    self.input = self.input.replace('>>>', '>>>\n')
-                    self.TAB = True
-                self.input = self.input + '    '
-        imgui.pop_style_color(1)
+            #imgui.push_style_color(imgui.COLOR_TEXT, *self.KEY_COLOR_ORANGE)
+            if imgui.button(key, width=80, height=60):
+                if default is None:
+                    if self.input == '':
+                        self.input = key
+                    else:
+                        self.input = self.input + key
+                elif default == 'SHIFT':
+                    self.shift_key()
+                elif default == 'SYS':
+                    self.sys_key()
+                elif default == 'TAB':
+                    if self.TAB == False:
+                        self.input = self.input.replace('>>>', '>>>\n')
+                        self.TAB = True
+                    self.input = self.input + '    '
+            imgui.pop_style_color(1)
+        except Exception as e:
+            self.logger.error(e)
 
     # Toggle keyboard on or off
     def toggleKeyboard(self):
-        imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_COLOR)
+        imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_COLOR_LGRAY)
         if imgui.button("Keyboard", width=200, height=60):
             if self.keyboard_toggled:
                 self.keyboard_toggled = False
@@ -128,7 +137,7 @@ class Keyboard(object):
             for rows in keyboard:
                 for row in rows:
                     if row == 'TAB' or row == 'SYS' or row == 'SHIFT':
-                        self.keyboard_key(row, False, default=row, color=self.KEY_FUNC_COLOR)
+                        self.keyboard_key(row, False, default=row)
                     elif row == '`' or row == '~':
                         self.keyboard_key(row, False)
                     else:
@@ -139,7 +148,7 @@ class Keyboard(object):
             imgui.same_line()
 
             # Give a style to the button
-            imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_FUNC_COLOR)
+            imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_COLOR_BGRAY)
             # Create a button "Enter"
             if imgui.button("ENTER", width=175, height=60):
                 # Execute code when button is pressed
@@ -150,7 +159,7 @@ class Keyboard(object):
             # Notice there is no "imgui.same_line()" here. This is a new line
 
             # Give a style to the button
-            imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_FUNC_COLOR)
+            imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_COLOR_BGRAY)
             # Create a button "SPACE"
             if imgui.button("SPACE", width=970, height=50):
                 # Execute code when button is pressed
@@ -163,7 +172,7 @@ class Keyboard(object):
             imgui.same_line()
 
             # Give a style to the button
-            imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_FUNC_COLOR)
+            imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_COLOR_BGRAY)
             # Create a button "CLEAR"
             if imgui.button("CLEAR", width=80, height=50):
                 # Execute code when button is pressed
@@ -176,7 +185,7 @@ class Keyboard(object):
             imgui.same_line()
 
             # Give a style to the button
-            imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_FUNC_COLOR)
+            imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_COLOR_BGRAY)
             # Create a button "BACKSPACE"
             if imgui.button("BACKSPACE", width=150, height=50):
                 # Execute code when button is pressed

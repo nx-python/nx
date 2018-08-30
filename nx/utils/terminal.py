@@ -62,7 +62,7 @@ class Terminal(Screen, Keyboard):
         Screen.__init__(self)
         # A storage for our history
         self.cli_history = []
-        Keyboard.__init__(self, self.cli_history)
+        Keyboard.__init__(self, self.cli_history, logging)
 
         # Initialize class as object
         self.python = Python(logging)
@@ -70,7 +70,7 @@ class Terminal(Screen, Keyboard):
 
         # Initialize menu's, usually a class object
         # Those menus are most of the time static
-        self.settings = Settings(self.KEY_FUNC_COLOR, self.KEY_COLOR_BLACK, self.input)
+        self.settings = Settings(self.KEY_COLOR_LGRAY, self.KEY_COLOR_BLACK, self.input)
 
 
     def main(self):
@@ -143,7 +143,7 @@ class Terminal(Screen, Keyboard):
             imgui.text("Keyboard: {} | Shift: {} | SYS: {}".format(self.keyboard_toggled, self.CAPS, self.SYS))
 
             # Give a style to the button
-            imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_COLOR)
+            imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_COLOR_LGRAY)
             # Create a button "Import"
             if imgui.button("Import", width=200, height=60):
                 # Toggle Keyboard if not already
@@ -157,7 +157,7 @@ class Terminal(Screen, Keyboard):
             imgui.same_line()
 
             # Give a style to the button
-            imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_COLOR)
+            imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_COLOR_LGRAY)
             # Create a button "Export"
             if imgui.button("Export", width=200, height=60):
                 export_check = "".join(self.utils.export(self.cli_history))
@@ -187,7 +187,7 @@ class Terminal(Screen, Keyboard):
             imgui.same_line()
 
             # Give a style to the button
-            imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_COLOR)
+            imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_COLOR_LGRAY)
             # Create a button "Confirm" if the input from the user is higher then 0
             if imgui.button("Confirm", width=200, height=60) and len(self.input) > 0:
                 # If pastebin is used
@@ -224,7 +224,7 @@ class Terminal(Screen, Keyboard):
             imgui.same_line()
 
             # Create a style for a new button
-            imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_FUNC_COLOR)
+            imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_COLOR_BGRAY)
             # Create a button "Settings"
             if imgui.button("S", width=40, height=40):
                 # If the keyboard was toggled turn it off
