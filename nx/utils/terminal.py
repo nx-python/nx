@@ -34,8 +34,6 @@ def stderrIO(stderr=None):
     sys.stderr = old
 
 class Terminal(Screen, Keyboard):
-
-
     def __str__(self):
         return "Terminal for the switch, made by PuffDip"
 
@@ -152,7 +150,7 @@ class Terminal(Screen, Keyboard):
                 if not self.keyboard_toggled:
                     self.keyboard_toggled = True
                 #self.input = "https://pastebin.com/"
-                self.input = "dpaste:>>0CHTWFR"
+                self.input = "dpaste:>>"
             # push style
             imgui.pop_style_color(1)
 
