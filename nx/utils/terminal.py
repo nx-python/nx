@@ -241,4 +241,5 @@ class Terminal(Screen, Keyboard):
             imgui.render()
             self.renderer.render()
 
+        # This function is needed else the switch crashes
         self.renderer.shutdown()
