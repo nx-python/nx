@@ -1,23 +1,13 @@
 import imgui
 
-def colorToFloat(self, t):
-    """
-    Used to convert RGB to a float value
-    :param t: Tuple (R,G,B)
-    :return: Floats (0.0, 0.0, 0.0)
-    """
-    nt = ()
-    for v in t:
-        nt += ((1 / 255) * v,)
-    return nt
-
-
 class Settings(object):
-    def __init__(self, KEY_FUNC_COLOR, KEY_COLOR_BLACK, INPUT):
+    def __init__(self, KEY_FUNC_COLOR, KEY_COLOR_BLACK, INPUT, KEY_COLOR_BGRAY, KEY_COLOR_LGRAY):
         # Button toggles: Default = False
         self.setting_toggle = False
         self.KEY_FUNC_COLOR = KEY_FUNC_COLOR
         self.KEY_COLOR_BLACK = KEY_COLOR_BLACK
+        self.KEY_COLOR_BGRAY = KEY_COLOR_BGRAY
+        self.KEY_COLOR_LGRAY = KEY_COLOR_LGRAY
 
         self.input = INPUT
 
@@ -46,7 +36,7 @@ class Settings(object):
         imgui.pop_style_color(1)
 
 
-    def render(self):
+    def srender(self):
         # Create a GUI group
         imgui.begin_group()
 
@@ -87,9 +77,49 @@ class Settings(object):
         """
         NEW ROW STARTS HERE ROW #5
         """
-        for i in range(5):
-            self.placeholder()
+        # TESTS
+        """
+        Give code for a long list, test long outputs        
+        """
+        # Give a style to the button
+        imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_COLOR_LGRAY)
+        # Create a button "Long Output"
+        if imgui.button("Long Output", width=self.BTN_WIDTH, height=self.BTN_HEIGHT):
+            # Execute code when button is pressed
+            self.input = "dpaste:>>070KVYA"
+        # push style
+        imgui.pop_style_color(1)
+
+        imgui.same_line()
+
+        """
+        Test SSL
+        """
+        # Give a style to the button
+        imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_COLOR_LGRAY)
+        # Create a button "Test SSL"
+        if imgui.button("Test SSL", width=self.BTN_WIDTH, height=self.BTN_HEIGHT):
+            # Execute code when button is pressed
+            self.input = "dpaste:>>0P6AH88"
+        # push style
+        imgui.pop_style_color(1)
+
+        imgui.same_line()
+
+        """
+        import this        
+        """
+        # Give a style to the button
+        imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_COLOR_LGRAY)
+        # Create a button "Import this"
+        if imgui.button("Import this", width=self.BTN_WIDTH, height=self.BTN_HEIGHT):
+            # Execute code when button is pressed
+            self.input = "dpaste:>>1441C4D"
+        # push style
+        imgui.pop_style_color(1)
+
+        for i in range(3):
             imgui.same_line()
-        self.placeholder()
+            self.placeholder()
 
         imgui.end_group()

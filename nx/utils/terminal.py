@@ -33,7 +33,7 @@ def stderrIO(stderr=None):
     yield stderr
     sys.stderr = old
 
-class Terminal(Screen, Keyboard):
+class Terminal(Screen, Keyboard, Settings):
     def __str__(self):
         return "Terminal for the switch, made by PuffDip"
 
@@ -43,7 +43,8 @@ class Terminal(Screen, Keyboard):
         self.version_number = '0.2A'
 
         # Useful static variables
-        self.currentDir = os.getcwd()
+        self.currentDir = os.getcwd() #scdmc:/switch/PyNX
+        self.nxDir = self.currentDir + "/lib/python3.5/nx"
         self.CONSOLE_TEXT = "Python {} on Nintendo Switch\n\n>>>".format(sys.version)
         # A check to see if the terminal just started or not
         self.just_booted = True
@@ -63,15 +64,30 @@ class Terminal(Screen, Keyboard):
         # A storage for our history
         self.cli_history = []
         Keyboard.__init__(self, self.cli_history, logging)
+        # Initialize menu's, usually a class object
+        # Those menus are most of the time static
+        Settings.__init__(self,
+                          self.KEY_COLOR_LGRAY,
+                          self.KEY_COLOR_BLACK,
+                          self.input,
+                          self.KEY_COLOR_BGRAY,
+                          self.KEY_COLOR_LGRAY)
+
+
+        # Initialize font
+        self.font = imgui.get_io().fonts.add_font_from_file_ttf("terminal_src/fonts/TimesNewRoman.ttf", 24)
 
         # Initialize class as object
         self.python = Python(logging)
         self.utils = Utils(logging)
 
-        # Initialize menu's, usually a class object
-        # Those menus are most of the time static
-        self.settings = Settings(self.KEY_COLOR_LGRAY, self.KEY_COLOR_BLACK, self.input)
 
+
+        # Initialize font
+        #io = imgui.get_io()
+        # setup default font
+        #self.font = io.fonts.add_font_from_file_ttf("{}/utils/terminal_src/fonts/TimesNewRoman.ttf".format(self.nxDir), 24, io.fonts.get_glyph_ranges_latin())
+        #io.fonts.texture_id = 0  # set any texture ID to avoid segfaults(edited)
 
     def main(self):
         """
@@ -95,13 +111,13 @@ class Terminal(Screen, Keyboard):
             # Create a window in the frame we created ( Ignore pep8 for this line)
             imgui.begin("", flags=imgui.WINDOW_NO_TITLE_BAR | imgui.WINDOW_NO_RESIZE | imgui.WINDOW_NO_MOVE | imgui.WINDOW_NO_SAVED_SETTINGS)
             # Version placeholder
-            imgui.text("PyNx Terminal By PuffDip" + " - V" + str(self.version_number))
+            imgui.text("PyNx Terminal By PuffDip" + " - V" + str(self.version_number) + str(self.currentDir))
 
             # This check looks if any menu is open
             # If so the terminal rescales so the menu fits on screen
             if \
                     self.keyboard_toggled or\
-                    self.settings.setting_toggle:
+                    self.setting_toggle:
                 # end check
                 # Set the region so a new menu can fit
                 imgui.begin_child("region", -5, -430, border=True)
@@ -118,10 +134,12 @@ class Terminal(Screen, Keyboard):
                 # Show version number
                 imgui.text(self.CONSOLE_TEXT)
             else:
+                #imgui.push_font(self.font)
                 if self.cli_history:
                     imgui.text("{}\n\n>>>\n{}".format("\n".join(self.cli_history), self.input))
                 else:
                     imgui.text(">>>\n{}".format(self.input))
+                #imgui.pop_font()
 
             # Make sure the screen stays fullscreen
             imgui.end_child()
@@ -132,12 +150,12 @@ class Terminal(Screen, Keyboard):
             if the user uses its keyboard. If so we render the keyboard.
             """
             # Check if the setting page is toggled
-            if not self.settings.setting_toggle:
+            if not self.setting_toggle:
                     # Render keyboard
-                    self.render()
+                    self.krender()
             # If the setting page is active show the setting page instead of rendering the keyboard
             else:
-                self.settings.render()
+                self.srender()
 
             # Command line
             imgui.text("Keyboard: {} | Shift: {} | SYS: {}".format(self.keyboard_toggled, self.CAPS, self.SYS))
@@ -181,8 +199,8 @@ class Terminal(Screen, Keyboard):
 
             self.toggleKeyboard()
             # If settings was already opened close setting page
-            if self.keyboard_toggled and self.settings.setting_toggle:
-                self.settings.setting_toggle = False
+            if self.keyboard_toggled and self.setting_toggle:
+                self.setting_toggle = False
 
             imgui.same_line()
 
@@ -212,6 +230,22 @@ class Terminal(Screen, Keyboard):
                         self.input = err
                     if exc:
                         self.input = exc
+
+                    # total character limit on screen
+                    limit = 160
+                    # Make sure history doesn't go off screen
+                    if len(self.input) >= limit:
+                        result = ""
+                        tmp_list = self.input.split("\n")
+                        for sentence in tmp_list:
+                            if len(sentence) >= limit:
+                                sentence = "\n".join([sentence[i:i + limit] for i in range(0, len(sentence), limit)])
+                                result += sentence
+                                result += "\n"
+                            else:
+                                result += sentence
+                                result += "\n"
+                        self.input = result
                     # Append result to history
                     self.cli_history.append(self.input)
                     # Clear variable to get used once more
@@ -230,8 +264,11 @@ class Terminal(Screen, Keyboard):
                 # If the keyboard was toggled turn it off
                 if self.keyboard_toggled:
                     self.keyboard_toggled = False
+                    self.CAPS = False
+                    self.SYS = False
+
                 # Finally render the settings
-                self.settings.toggle()
+                self.toggle()
             # Push style of the button
             imgui.pop_style_color(1)
 

@@ -120,7 +120,7 @@ class Keyboard(object):
                 self.keyboard_toggled = True
         imgui.pop_style_color(1)
 
-    def render(self):
+    def krender(self):
         # After that check if the keyboard is open
         if self.keyboard_toggled:
             # If the keyboard is open we want to generate a imgui group so we can render the keyboard
