@@ -235,6 +235,8 @@ class Terminal(Screen, Keyboard, Settings):
                                 result += sentence
                                 result += "\n"
                         self.input = result
+                        result = None
+                        del result
                     # Append result to history
                     self.cli_history.append(self.input)
                     # Clear variable to get used once more

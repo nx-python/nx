@@ -118,7 +118,21 @@ class Settings(object):
         # push style
         imgui.pop_style_color(1)
 
-        for i in range(3):
+        imgui.same_line()
+
+        """
+        for loop      
+        """
+        # Give a style to the button
+        imgui.push_style_color(imgui.COLOR_BUTTON, *self.KEY_COLOR_LGRAY)
+        # Create a button "For loop this"
+        if imgui.button("For loop", width=self.BTN_WIDTH, height=self.BTN_HEIGHT):
+            # Execute code when button is pressed
+            self.input = "dpaste:>>2BTR5CV"
+        # push style
+        imgui.pop_style_color(1)
+
+        for i in range(2):
             imgui.same_line()
             self.placeholder()
 
