@@ -111,7 +111,7 @@ class Terminal(Screen, Keyboard, Settings):
             # Create a window in the frame we created ( Ignore pep8 for this line)
             imgui.begin("", flags=imgui.WINDOW_NO_TITLE_BAR | imgui.WINDOW_NO_RESIZE | imgui.WINDOW_NO_MOVE | imgui.WINDOW_NO_SAVED_SETTINGS)
             # Version placeholder
-            imgui.text("PyNx Terminal By PuffDip" + " - V" + str(self.version_number) + str(self.currentDir))
+            imgui.text("PyNx Terminal By PuffDip" + " - V" + str(self.version_number))
 
             # This check looks if any menu is open
             # If so the terminal rescales so the menu fits on screen
