@@ -218,6 +218,9 @@ class Terminal(Screen, Keyboard, Settings):
                     # Start to fetch the data
                     self.input = self.utils.import_url(url)
                 else:
+                    # Append result to history
+                    self.input += "\n"
+                    self.cli_history.append(self.input)
                     # Execute user command
                     self.input = self.python.repl(self.input)
                     # total character limit on screen

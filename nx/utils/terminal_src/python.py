@@ -16,12 +16,9 @@ class Python(object):
         return content.strip('\n')
 
     def get_syntax_error(self, e):
-        try:
-            if e.text is None:
-                return '{0.__class__.__name__}: {0}'.format(e)
-            return '{0.text}{1:>{0.offset}}\n{2}: {0}'.format(e, '^', type(e).__name__)
-        except:
+        if e.text is None:
             return '{0.__class__.__name__}: {0}'.format(e)
+        return '{0.text}{1:>{0.offset}}\n{2}: {0}'.format(e, '^', type(e).__name__)
 
     def repl(self, raw_code):
         variables = {
@@ -32,10 +29,10 @@ class Python(object):
         cleaned = self.cleanup_code(raw_code)
         if cleaned in ('quit', 'exit', 'exit()'):
             pass # TODO quit terminal
-        self.logger.info(cleaned)
+
         executor = exec
         # if there are no new lines this is protentional a one liner
-        if cleaned.count('\n') == 0:
+        if raw_code.count('\n') == 0:
             try:
                 code = compile(cleaned, '<repl session>', 'eval')
             except SyntaxError:
@@ -58,7 +55,7 @@ class Python(object):
                 if inspect.iscode(result):
                     result = result
         except Exception as e:
-            return str(self.get_syntax_error(e))
+            return '{0.__class__.__name__}: {0}'.format(e)
         else:
             value = stdout.getvalue()
             if result is not None:
