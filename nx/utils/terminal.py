@@ -219,18 +219,7 @@ class Terminal(Screen, Keyboard, Settings):
                     self.input = self.utils.import_url(url)
                 else:
                     # Execute user command
-                    out, err, exc = self.python.execute(self.input)
-                    # Append user command to history
-                    self.input += "\n"
-                    self.cli_history.append(self.input)
-                    # Check whatever the result was of the command
-                    if out:
-                        self.input = out
-                    if err:
-                        self.input = err
-                    if exc:
-                        self.input = exc
-
+                    self.input = self.python.repl(self.input)
                     # total character limit on screen
                     limit = 160
                     # Make sure history doesn't go off screen
@@ -249,6 +238,7 @@ class Terminal(Screen, Keyboard, Settings):
                     # Append result to history
                     self.cli_history.append(self.input)
                     # Clear variable to get used once more
+                    self.input = None
                     self.input = ""
 
             # Push style of the button
